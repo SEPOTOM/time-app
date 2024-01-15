@@ -1,0 +1,24 @@
+.round-button {
+  margin: 100px;
+  display: inline-flex;
+  padding: 40px;
+
+  background-color: transparent;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition: all 0.3s ease 0s;
+}
+
+.round-button:hover {
+  box-shadow: inset -5px -5px 10px #000000;
+}
+
+.round-button:active {
+  color: #ffffff;
+
+  box-shadow: inset -50px -50px 100px #000000;
+
+  transition: all 0.1s ease 0s;
+}
