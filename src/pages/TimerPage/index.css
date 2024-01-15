@@ -1,0 +1,29 @@
+.timer-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.timer-page__header {
+  padding: 20px;
+}
+
+.timer-page__content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 50px;
+  padding: 30px;
+}
+
+.timer-page__footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  font-size: 3rem;
+  line-height: 150%;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
