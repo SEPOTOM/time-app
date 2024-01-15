@@ -7,7 +7,7 @@
   border-radius: 12px;
   cursor: pointer;
 
-  transition: box-shadow 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 
 .rounded-button:hover {
@@ -15,7 +15,9 @@
 }
 
 .rounded-button:active {
-  box-shadow: inset 40px 40px 5px #000000;
+  color: #ffffff;
+
+  box-shadow: inset -15px -15px 30px #000000;
 
   transition: box-shadow 0.1s ease 0s;
 }
