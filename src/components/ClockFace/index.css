@@ -10,3 +10,34 @@
 .clock-face__separator {
   transform: translate(0, -6%);
 }
+
+.clock-face__input {
+  max-width: 120px;
+  padding: 0;
+  margin: 0;
+
+  font-weight: 700;
+  font-size: 10rem;
+  line-height: 120%;
+  font-family: 'Courier New', Courier, monospace;
+
+  border: none;
+
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.clock-face__input:focus {
+  outline: none;
+}
+
+.clock-face__input:hover,
+.clock-face__input:focus {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.clock-face__input::-webkit-outer-spin-button,
+.clock-face__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
