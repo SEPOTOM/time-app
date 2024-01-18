@@ -1,10 +1,18 @@
 import './index.css';
 
+import { useState } from 'react';
+
 import { ClockFace, RoundedButton, RoundButton } from '../../components';
 
 import { HomeIcon, PlayIcon } from '@heroicons/react/24/solid';
 
 const TimerPage = () => {
+  const [countdownStarted, setCountdownStarted] = useState(false);
+
+  const handleCountdownStart = () => {
+    setCountdownStarted(true);
+  };
+
   return (
     <div className="timer-page">
       <header className="timer-page__header">
@@ -13,9 +21,9 @@ const TimerPage = () => {
         </RoundedButton>
       </header>
       <main className="timer-page__content">
-        <ClockFace />
+        <ClockFace countdownStarted={countdownStarted} />
         <div>
-          <RoundButton>
+          <RoundButton onClick={handleCountdownStart}>
             <PlayIcon width={48} />
           </RoundButton>
         </div>
