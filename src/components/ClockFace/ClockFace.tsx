@@ -93,11 +93,11 @@ const ClockFace = ({ countdownStarted }: Props) => {
         };
       });
 
-      timeoutId = setTimeout(decreaseTime, 1000);
+      timeoutId = window.setTimeout(decreaseTime, 1000);
     };
 
     if (countdownStarted) {
-      timeoutId = setTimeout(decreaseTime, 1000);
+      timeoutId = window.setTimeout(decreaseTime, 1000);
     }
 
     return () => clearTimeout(timeoutId);
