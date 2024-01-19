@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 
 import ClockFaceInput from './ClockFaceInput';
 
+import { formatTimeValue } from './utils';
+
 import { Props, TimeState } from './types';
 
 const ClockFace = ({ countdownStarted }: Props) => {
@@ -17,21 +19,15 @@ const ClockFace = ({ countdownStarted }: Props) => {
     let timeoutId = 0;
 
     const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
-      const newValue = Number(seconds) - 1;
+      const rawNewSeconds = Number(seconds) - 1;
 
-      if (newValue < 0 && hours === '00' && minutes === '00') {
+      if (rawNewSeconds < 0 && hours === '00' && minutes === '00') {
         return '00';
-      } else if (newValue < 0) {
+      } else if (rawNewSeconds < 0) {
         return '59';
       }
 
-      let formattedValue = String(newValue);
-
-      while (formattedValue.length < 2) {
-        formattedValue = `0${formattedValue}`;
-      }
-
-      return formattedValue;
+      return formatTimeValue(rawNewSeconds);
     };
 
     const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
@@ -39,21 +35,15 @@ const ClockFace = ({ countdownStarted }: Props) => {
         return minutes;
       }
 
-      const newValue = Number(minutes) - 1;
+      const rawNewMinutes = Number(minutes) - 1;
 
-      if (newValue < 0 && hours === '00') {
+      if (rawNewMinutes < 0 && hours === '00') {
         return '00';
-      } else if (newValue < 0) {
+      } else if (rawNewMinutes < 0) {
         return '59';
       }
 
-      let formattedValue = String(newValue);
-
-      while (formattedValue.length < 2) {
-        formattedValue = `0${formattedValue}`;
-      }
-
-      return formattedValue;
+      return formatTimeValue(rawNewMinutes);
     };
 
     const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
@@ -61,23 +51,17 @@ const ClockFace = ({ countdownStarted }: Props) => {
         return hours;
       }
 
-      const newValue = Number(hours) - 1;
+      const rawNewHours = Number(hours) - 1;
 
-      if (newValue < 0) {
+      if (rawNewHours < 0) {
         return '00';
       }
 
-      let formattedValue = String(newValue);
-
-      while (formattedValue.length < 2) {
-        formattedValue = `0${formattedValue}`;
-      }
-
-      return formattedValue;
+      return formatTimeValue(rawNewHours);
     };
 
     const decreaseTime = () => {
-      setTime((t) => {
+      setTime((t: TimeState) => {
         if (t.hours === '00' && t.minutes === '00' && t.seconds === '00') {
           return t;
         }
@@ -103,16 +87,16 @@ const ClockFace = ({ countdownStarted }: Props) => {
     return () => clearTimeout(timeoutId);
   }, [countdownStarted]);
 
-  const handleHoursChange = (newValue: string) => {
-    setTime((t) => ({ ...t, hours: newValue }));
+  const handleHoursChange = (newHours: string) => {
+    setTime((t) => ({ ...t, hours: newHours }));
   };
 
-  const handleMinutesChange = (newValue: string) => {
-    setTime((t) => ({ ...t, minutes: newValue }));
+  const handleMinutesChange = (newMinutes: string) => {
+    setTime((t) => ({ ...t, minutes: newMinutes }));
   };
 
-  const handleSecondsChange = (newValue: string) => {
-    setTime((t) => ({ ...t, seconds: newValue }));
+  const handleSecondsChange = (newSeconds: string) => {
+    setTime((t) => ({ ...t, seconds: newSeconds }));
   };
 
   return (
