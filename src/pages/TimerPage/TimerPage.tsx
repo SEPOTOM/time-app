@@ -14,6 +14,7 @@ import {
 const TimerPage = () => {
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [countdownPaused, setCountdownPaused] = useState(false);
+  const [countDownVersion, setCountdownVersion] = useState(0);
 
   const handleCountdownStart = () => {
     setCountdownStarted(true);
@@ -21,6 +22,12 @@ const TimerPage = () => {
 
   const handleCountdownPauseResume = () => {
     setCountdownPaused(!countdownPaused);
+  };
+
+  const handleCountdownStop = () => {
+    setCountdownStarted(false);
+    setCountdownPaused(false);
+    setCountdownVersion(countDownVersion + 1);
   };
 
   return (
@@ -34,6 +41,7 @@ const TimerPage = () => {
         <ClockFace
           countdownStarted={countdownStarted}
           countdownPaused={countdownPaused}
+          key={countDownVersion}
         />
         <div className="timer-page__buttons">
           {countdownStarted ? (
@@ -45,7 +53,7 @@ const TimerPage = () => {
                   <PauseIcon width={48} />
                 )}
               </RoundButton>
-              <RoundButton onClick={() => {}}>
+              <RoundButton onClick={handleCountdownStop}>
                 <StopIcon width={48} />
               </RoundButton>
             </>
