@@ -27,3 +27,8 @@
   line-height: 150%;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
+
+.timer-page__buttons {
+  display: flex;
+  column-gap: 60px;
+}
