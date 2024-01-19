@@ -1,5 +1,7 @@
 import { MouseEvent, KeyboardEvent, ChangeEvent, FocusEvent } from 'react';
 
+import { formatTimeValue } from './utils';
+
 import { InputProps } from './types';
 
 const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
@@ -32,12 +34,7 @@ const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     if (e.currentTarget.value.length < 2) {
-      let formattedValue = e.currentTarget.value;
-
-      while (formattedValue.length < 2) {
-        formattedValue = `0${formattedValue}`;
-      }
-
+      const formattedValue = formatTimeValue(e.currentTarget.value);
       onChange(formattedValue);
     }
   };
