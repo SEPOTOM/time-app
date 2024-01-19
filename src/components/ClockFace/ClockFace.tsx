@@ -8,7 +8,7 @@ import { formatTimeValue } from './utils';
 
 import { Props, TimeState } from './types';
 
-const ClockFace = ({ countdownStarted }: Props) => {
+const ClockFace = ({ countdownStarted, countdownPaused }: Props) => {
   const [time, setTime] = useState<TimeState>({
     hours: '00',
     minutes: '00',
@@ -80,12 +80,12 @@ const ClockFace = ({ countdownStarted }: Props) => {
       timeoutId = window.setTimeout(decreaseTime, 1000);
     };
 
-    if (countdownStarted) {
+    if (countdownStarted && !countdownPaused) {
       timeoutId = window.setTimeout(decreaseTime, 1000);
     }
 
     return () => clearTimeout(timeoutId);
-  }, [countdownStarted]);
+  }, [countdownStarted, countdownPaused]);
 
   const handleHoursChange = (newHours: string) => {
     setTime((t) => ({ ...t, hours: newHours }));
