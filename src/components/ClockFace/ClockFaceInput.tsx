@@ -1,6 +1,6 @@
 import { MouseEvent, KeyboardEvent, ChangeEvent, FocusEvent } from 'react';
 
-import { formatTimeValue } from './utils';
+import { formatTimeValue } from '../../utils/formatTimeValue';
 
 import { InputProps } from './types';
 

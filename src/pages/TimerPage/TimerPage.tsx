@@ -11,7 +11,7 @@ import {
   StopIcon,
 } from '@heroicons/react/24/solid';
 
-import { formatTimeValue } from '../../components/ClockFace/utils';
+import { formatTimeValue } from '../../utils/formatTimeValue';
 
 import { TimeState } from '../../types';
 
