@@ -8,9 +8,3 @@ export interface InputProps {
   value: string;
   onChange(newValue: string): void;
 }
-
-export interface TimeState {
-  hours: string;
-  minutes: string;
-  seconds: string;
-}

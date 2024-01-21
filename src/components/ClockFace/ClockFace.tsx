@@ -6,7 +6,8 @@ import ClockFaceInput from './ClockFaceInput';
 
 import { formatTimeValue } from './utils';
 
-import { Props, TimeState } from './types';
+import { Props } from './types';
+import { TimeState } from '../../types';
 
 const ClockFace = ({ countdownStarted, countdownPaused }: Props) => {
   const [time, setTime] = useState<TimeState>({
