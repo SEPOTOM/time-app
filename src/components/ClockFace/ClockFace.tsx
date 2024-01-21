@@ -1,92 +1,10 @@
 import './index.css';
 
-import { useEffect } from 'react';
-
 import ClockFaceInput from './ClockFaceInput';
 
-import { formatTimeValue } from './utils';
-
 import { Props } from './types';
-import { TimeState } from '../../types';
 
-const ClockFace = ({
-  time,
-  onTimeChange,
-  countdownStarted,
-  countdownPaused,
-}: Props) => {
-  useEffect(() => {
-    let timeoutId = 0;
-
-    const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
-      const rawNewSeconds = Number(seconds) - 1;
-
-      if (rawNewSeconds < 0 && hours === '00' && minutes === '00') {
-        return '00';
-      } else if (rawNewSeconds < 0) {
-        return '59';
-      }
-
-      return formatTimeValue(rawNewSeconds);
-    };
-
-    const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
-      if (seconds !== '00') {
-        return minutes;
-      }
-
-      const rawNewMinutes = Number(minutes) - 1;
-
-      if (rawNewMinutes < 0 && hours === '00') {
-        return '00';
-      } else if (rawNewMinutes < 0) {
-        return '59';
-      }
-
-      return formatTimeValue(rawNewMinutes);
-    };
-
-    const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
-      if (seconds !== '00' || minutes !== '00') {
-        return hours;
-      }
-
-      const rawNewHours = Number(hours) - 1;
-
-      if (rawNewHours < 0) {
-        return '00';
-      }
-
-      return formatTimeValue(rawNewHours);
-    };
-
-    const decreaseTime = () => {
-      onTimeChange((t: TimeState) => {
-        if (t.hours === '00' && t.minutes === '00' && t.seconds === '00') {
-          return t;
-        }
-
-        const newSeconds = getNewSeconds(t);
-        const newMinutes = getNewMinutes(t);
-        const newHours = getNewHours(t);
-
-        return {
-          hours: newHours,
-          minutes: newMinutes,
-          seconds: newSeconds,
-        };
-      });
-
-      timeoutId = window.setTimeout(decreaseTime, 1000);
-    };
-
-    if (countdownStarted && !countdownPaused) {
-      timeoutId = window.setTimeout(decreaseTime, 1000);
-    }
-
-    return () => clearTimeout(timeoutId);
-  }, [countdownStarted, countdownPaused, onTimeChange]);
-
+const ClockFace = ({ time, onTimeChange }: Props) => {
   const handleHoursChange = (newHours: string) => {
     onTimeChange((t) => ({ ...t, hours: newHours }));
   };
