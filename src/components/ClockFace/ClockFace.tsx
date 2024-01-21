@@ -1,6 +1,6 @@
 import './index.css';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import ClockFaceInput from './ClockFaceInput';
 
@@ -9,13 +9,12 @@ import { formatTimeValue } from './utils';
 import { Props } from './types';
 import { TimeState } from '../../types';
 
-const ClockFace = ({ countdownStarted, countdownPaused }: Props) => {
-  const [time, setTime] = useState<TimeState>({
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-  });
-
+const ClockFace = ({
+  time,
+  onTimeChange,
+  countdownStarted,
+  countdownPaused,
+}: Props) => {
   useEffect(() => {
     let timeoutId = 0;
 
@@ -62,7 +61,7 @@ const ClockFace = ({ countdownStarted, countdownPaused }: Props) => {
     };
 
     const decreaseTime = () => {
-      setTime((t: TimeState) => {
+      onTimeChange((t: TimeState) => {
         if (t.hours === '00' && t.minutes === '00' && t.seconds === '00') {
           return t;
         }
@@ -86,18 +85,18 @@ const ClockFace = ({ countdownStarted, countdownPaused }: Props) => {
     }
 
     return () => clearTimeout(timeoutId);
-  }, [countdownStarted, countdownPaused]);
+  }, [countdownStarted, countdownPaused, onTimeChange]);
 
   const handleHoursChange = (newHours: string) => {
-    setTime((t) => ({ ...t, hours: newHours }));
+    onTimeChange((t) => ({ ...t, hours: newHours }));
   };
 
   const handleMinutesChange = (newMinutes: string) => {
-    setTime((t) => ({ ...t, minutes: newMinutes }));
+    onTimeChange((t) => ({ ...t, minutes: newMinutes }));
   };
 
   const handleSecondsChange = (newSeconds: string) => {
-    setTime((t) => ({ ...t, seconds: newSeconds }));
+    onTimeChange((t) => ({ ...t, seconds: newSeconds }));
   };
 
   return (

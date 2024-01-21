@@ -11,13 +11,21 @@ import {
   StopIcon,
 } from '@heroicons/react/24/solid';
 
+import { TimeState } from '../../types';
+
 const TimerPage = () => {
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [countdownPaused, setCountdownPaused] = useState(false);
-  const [countDownVersion, setCountdownVersion] = useState(0);
+  const [time, setTime] = useState<TimeState>({
+    hours: '00',
+    minutes: '00',
+    seconds: '00',
+  });
 
   const handleCountdownStart = () => {
-    setCountdownStarted(true);
+    if (time.hours !== '00' || time.minutes !== '00' || time.seconds !== '00') {
+      setCountdownStarted(true);
+    }
   };
 
   const handleCountdownPauseResume = () => {
@@ -27,7 +35,11 @@ const TimerPage = () => {
   const handleCountdownStop = () => {
     setCountdownStarted(false);
     setCountdownPaused(false);
-    setCountdownVersion(countDownVersion + 1);
+    setTime({
+      hours: '00',
+      minutes: '00',
+      seconds: '00',
+    });
   };
 
   return (
@@ -39,9 +51,10 @@ const TimerPage = () => {
       </header>
       <main className="timer-page__content">
         <ClockFace
+          time={time}
+          onTimeChange={setTime}
           countdownStarted={countdownStarted}
           countdownPaused={countdownPaused}
-          key={countDownVersion}
         />
         <div className="timer-page__buttons">
           {countdownStarted ? (
