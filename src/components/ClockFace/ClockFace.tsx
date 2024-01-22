@@ -2,19 +2,20 @@ import './index.css';
 
 import ClockFaceInput from './ClockFaceInput';
 
+import { TimeState } from '../../types';
 import { Props } from './types';
 
 const ClockFace = ({ time, onTimeChange }: Props) => {
   const handleHoursChange = (newHours: string) => {
-    onTimeChange((t) => ({ ...t, hours: newHours }));
+    onTimeChange((t: TimeState) => ({ ...t, hours: newHours }));
   };
 
   const handleMinutesChange = (newMinutes: string) => {
-    onTimeChange((t) => ({ ...t, minutes: newMinutes }));
+    onTimeChange((t: TimeState) => ({ ...t, minutes: newMinutes }));
   };
 
   const handleSecondsChange = (newSeconds: string) => {
-    onTimeChange((t) => ({ ...t, seconds: newSeconds }));
+    onTimeChange((t: TimeState) => ({ ...t, seconds: newSeconds }));
   };
 
   return (
