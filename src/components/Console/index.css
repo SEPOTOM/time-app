@@ -1,0 +1,69 @@
+.console {
+  width: 500px;
+  padding: 20px 0 30px;
+
+  font-family: 'Courier New', Courier, monospace;
+
+  background-color: #d3d3d3;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+
+.console__content {
+  box-sizing: border-box;
+  width: 100%;
+  height: 200px;
+  padding: 10px 20px;
+
+  background-color: #e3e3e3;
+  border-bottom: 1px solid #000000;
+}
+
+.console__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 20px;
+
+  border-bottom: 1px solid #000000;
+}
+
+.console__title {
+  margin: 0;
+
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 130%;
+  letter-spacing: 0.2em;
+}
+
+.console__button {
+  padding: 0 5px;
+
+  font-weight: 700;
+  font-size: 1.6rem;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+
+  background-color: #e3e3e3;
+  border: 1px solid #000000;
+  border-radius: 2px;
+
+  cursor: pointer;
+}
+
+.console__button:hover {
+  background-color: #cdcdcd;
+}
+
+.console__button:active {
+  background-color: #b1b1b1;
+}
+
+.console__placeholder {
+  margin: 0;
+
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 130%;
+}
