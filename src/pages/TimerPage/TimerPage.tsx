@@ -1,6 +1,6 @@
 import './index.css';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { ClockFace, RoundedButton, RoundButton } from '../../components';
 
@@ -18,11 +18,14 @@ import { TimeState } from '../../types';
 const TimerPage = () => {
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [countdownPaused, setCountdownPaused] = useState(false);
+  const [countdownFinished, setCountdownFinished] = useState(false);
   const [time, setTime] = useState<TimeState>({
     hours: '00',
     minutes: '00',
     seconds: '00',
   });
+
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     let timeoutId = 0;
@@ -72,6 +75,7 @@ const TimerPage = () => {
     const decreaseTime = () => {
       setTime((t: TimeState) => {
         if (t.hours === '00' && t.minutes === '00' && t.seconds === '00') {
+          setCountdownFinished(true);
           return t;
         }
 
@@ -89,12 +93,24 @@ const TimerPage = () => {
       timeoutId = window.setTimeout(decreaseTime, 1000);
     };
 
-    if (countdownStarted && !countdownPaused) {
+    if (countdownStarted && !countdownPaused && !countdownFinished) {
       timeoutId = window.setTimeout(decreaseTime, 1000);
     }
 
     return () => clearTimeout(timeoutId);
-  }, [countdownStarted, countdownPaused]);
+  }, [countdownStarted, countdownPaused, countdownFinished]);
+
+  useEffect(() => {
+    if (countdownFinished) {
+      audioRef.current?.play();
+    } else {
+      audioRef.current?.pause();
+
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }, [countdownFinished]);
 
   const handleCountdownStart = () => {
     if (time.hours !== '00' || time.minutes !== '00' || time.seconds !== '00') {
@@ -109,6 +125,7 @@ const TimerPage = () => {
   const handleCountdownStop = () => {
     setCountdownStarted(false);
     setCountdownPaused(false);
+    setCountdownFinished(false);
     setTime({
       hours: '00',
       minutes: '00',
@@ -147,6 +164,7 @@ const TimerPage = () => {
         </div>
       </main>
       <footer className="timer-page__footer">Time App</footer>
+      <audio src="./alarm_clock.mp3" loop hidden ref={audioRef}></audio>
     </div>
   );
 };
