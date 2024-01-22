@@ -1,14 +1,10 @@
 import './index.css';
 
 import { useState, useEffect, useRef } from 'react';
-import {
-  HomeIcon,
-  PlayIcon,
-  PauseIcon,
-  StopIcon,
-} from '@heroicons/react/24/solid';
+import { HomeIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 
 import { ClockFace, RoundedButton, RoundButton } from '../../components';
+import PauseResumeButton from './PauseResumeButton';
 
 import { formatTimeValue } from '../../utils/formatTimeValue';
 import { isTimeZero } from './utils';
@@ -147,13 +143,10 @@ const TimerPage = () => {
           {countdownStarted ? (
             <>
               {!countdownFinished && (
-                <RoundButton onClick={handleCountdownPauseResume}>
-                  {countdownPaused ? (
-                    <PlayIcon width={48} />
-                  ) : (
-                    <PauseIcon width={48} />
-                  )}
-                </RoundButton>
+                <PauseResumeButton
+                  onClick={handleCountdownPauseResume}
+                  countdownPaused={countdownPaused}
+                />
               )}
               <RoundButton onClick={handleCountdownStop}>
                 <StopIcon width={48} />
