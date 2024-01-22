@@ -145,13 +145,15 @@ const TimerPage = () => {
         <div className="timer-page__buttons">
           {countdownStarted ? (
             <>
-              <RoundButton onClick={handleCountdownPauseResume}>
-                {countdownPaused ? (
-                  <PlayIcon width={48} />
-                ) : (
-                  <PauseIcon width={48} />
-                )}
-              </RoundButton>
+              {!countdownFinished && (
+                <RoundButton onClick={handleCountdownPauseResume}>
+                  {countdownPaused ? (
+                    <PlayIcon width={48} />
+                  ) : (
+                    <PauseIcon width={48} />
+                  )}
+                </RoundButton>
+              )}
               <RoundButton onClick={handleCountdownStop}>
                 <StopIcon width={48} />
               </RoundButton>
