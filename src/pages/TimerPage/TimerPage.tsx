@@ -1,9 +1,6 @@
 import './index.css';
 
 import { useState, useEffect, useRef } from 'react';
-
-import { ClockFace, RoundedButton, RoundButton } from '../../components';
-
 import {
   HomeIcon,
   PlayIcon,
@@ -11,7 +8,10 @@ import {
   StopIcon,
 } from '@heroicons/react/24/solid';
 
+import { ClockFace, RoundedButton, RoundButton } from '../../components';
+
 import { formatTimeValue } from '../../utils/formatTimeValue';
+import { isTimeZero } from './utils';
 
 import { TimeState } from '../../types';
 
@@ -28,7 +28,7 @@ const TimerPage = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    let timeoutId = 0;
+    let timeoutId: number | null = null;
 
     const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
       const rawNewSeconds = Number(seconds) - 1;
@@ -74,19 +74,15 @@ const TimerPage = () => {
 
     const decreaseTime = () => {
       setTime((t: TimeState) => {
-        if (t.hours === '00' && t.minutes === '00' && t.seconds === '00') {
+        if (isTimeZero(t)) {
           setCountdownFinished(true);
           return t;
         }
 
-        const newSeconds = getNewSeconds(t);
-        const newMinutes = getNewMinutes(t);
-        const newHours = getNewHours(t);
-
         return {
-          hours: newHours,
-          minutes: newMinutes,
-          seconds: newSeconds,
+          hours: getNewHours(t),
+          minutes: getNewMinutes(t),
+          seconds: getNewSeconds(t),
         };
       });
 
@@ -97,23 +93,28 @@ const TimerPage = () => {
       timeoutId = window.setTimeout(decreaseTime, 1000);
     }
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [countdownStarted, countdownPaused, countdownFinished]);
 
   useEffect(() => {
-    if (countdownFinished) {
-      audioRef.current?.play();
-    } else {
-      audioRef.current?.pause();
+    if (!audioRef.current) {
+      return;
+    }
 
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-      }
+    if (countdownFinished) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
   }, [countdownFinished]);
 
   const handleCountdownStart = () => {
-    if (time.hours !== '00' || time.minutes !== '00' || time.seconds !== '00') {
+    if (!isTimeZero(time)) {
       setCountdownStarted(true);
     }
   };
