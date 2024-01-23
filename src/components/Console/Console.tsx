@@ -2,6 +2,7 @@ import './index.css';
 
 interface Props {
   roundsTime: string[];
+  onClear(): void;
 }
 
 const formatIndex = (index: number): string => {
@@ -21,12 +22,12 @@ const formatIndex = (index: number): string => {
   }
 };
 
-const Console = ({ roundsTime }: Props) => {
+const Console = ({ roundsTime, onClear }: Props) => {
   return (
     <div className="console">
       <div className="console__heading">
         <p className="console__title">Rounds</p>
-        <button className="console__button" type="button">
+        <button className="console__button" type="button" onClick={onClear}>
           Clear
         </button>
       </div>
