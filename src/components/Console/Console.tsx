@@ -1,6 +1,10 @@
 import './index.css';
 
-const Console = () => {
+interface Props {
+  roundsTime: string[];
+}
+
+const Console = ({ roundsTime }: Props) => {
   return (
     <div className="console">
       <div className="console__heading">
@@ -10,7 +14,23 @@ const Console = () => {
         </button>
       </div>
       <div className="console__content">
-        <p className="console__placeholder">-- Rounds will be shown here --</p>
+        {roundsTime.length > 0 ? (
+          <ul className="console__list">
+            {roundsTime
+              .map((roundTime, index) => {
+                return (
+                  <li className="console__item" key={index}>
+                    {index + 1} Round -- {roundTime}
+                  </li>
+                );
+              })
+              .reverse()}
+          </ul>
+        ) : (
+          <p className="console__placeholder">
+            -- Rounds will be shown here --
+          </p>
+        )}
       </div>
     </div>
   );

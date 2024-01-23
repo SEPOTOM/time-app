@@ -17,6 +17,8 @@
 
   background-color: #e3e3e3;
   border-bottom: 1px solid #000000;
+
+  overflow: auto;
 }
 
 .console__heading {
@@ -66,4 +68,20 @@
   font-style: italic;
   font-size: 1.6rem;
   line-height: 130%;
+}
+
+.console__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.console__item {
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 150%;
 }
