@@ -1,8 +1,8 @@
 import { PauseIcon, PlayIcon } from '@heroicons/react/24/solid';
 
-import { RoundButton } from '../../components';
+import { RoundButton } from '..';
 
-import { PauseResumeButtonProps } from './types';
+import { PauseResumeButtonProps } from '../../pages/TimerPage/types';
 
 const PauseResumeButton = ({
   onClick,

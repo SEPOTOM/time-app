@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { HomeIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 
 import { ClockFace, RoundedButton, RoundButton } from '../../components';
-import PauseResumeButton from './PauseResumeButton';
+import PauseResumeButton from '../../components/PauseResumeButton/PauseResumeButton';
 
 import { formatTimeValue } from '../../utils/formatTimeValue';
 import { isTimeZero } from './utils';
