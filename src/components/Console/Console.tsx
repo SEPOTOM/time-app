@@ -4,6 +4,23 @@ interface Props {
   roundsTime: string[];
 }
 
+const formatIndex = (index: number): string => {
+  switch (index) {
+    case 1: {
+      return '1st';
+    }
+    case 2: {
+      return '2nd';
+    }
+    case 3: {
+      return '3rd';
+    }
+    default: {
+      return `${index}th`;
+    }
+  }
+};
+
 const Console = ({ roundsTime }: Props) => {
   return (
     <div className="console">
@@ -20,7 +37,7 @@ const Console = ({ roundsTime }: Props) => {
               .map((roundTime, index) => {
                 return (
                   <li className="console__item" key={index}>
-                    {index + 1} Round -- {roundTime}
+                    {formatIndex(index + 1)} Round -- {roundTime}
                   </li>
                 );
               })
