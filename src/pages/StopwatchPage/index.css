@@ -1,0 +1,33 @@
+.stopwatch {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stopwatch__header {
+  padding: 20px;
+}
+
+.stopwatch__content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+  padding: 30px;
+}
+
+.stopwatch__footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  font-size: 3rem;
+  line-height: 150%;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.stopwatch__buttons {
+  margin-bottom: 20px;
+}
