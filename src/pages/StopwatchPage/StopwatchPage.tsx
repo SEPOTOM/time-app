@@ -28,7 +28,7 @@ const StopwatchPage = () => {
     minutes: '00',
     seconds: '00',
   });
-  const [roundsTime, setRoundsTime] = useState<string[]>([]);
+  const [roundsTimes, setRoundsTimes] = useState<string[][]>([]);
 
   useEffect(() => {
     let intervalId: number | null = null;
@@ -98,6 +98,7 @@ const StopwatchPage = () => {
 
   const handleClockStart = () => {
     setIsStarted(true);
+    setRoundsTimes([...roundsTimes, []]);
   };
 
   const handlePauseToggle = () => {
@@ -115,14 +116,17 @@ const StopwatchPage = () => {
   };
 
   const handleRoundAdd = () => {
-    setRoundsTime([
-      ...roundsTime,
-      `${time.hours}:${time.minutes}:${time.seconds}`,
+    setRoundsTimes([
+      ...roundsTimes.slice(0, roundsTimes.length - 1),
+      [
+        ...roundsTimes[roundsTimes.length - 1],
+        `${time.hours}:${time.minutes}:${time.seconds}`,
+      ],
     ]);
   };
 
   const handleConsoleClear = () => {
-    setRoundsTime([]);
+    setRoundsTimes([[]]);
   };
 
   return (
@@ -154,7 +158,7 @@ const StopwatchPage = () => {
             </RoundButton>
           )}
         </div>
-        <Console roundsTime={roundsTime} onClear={handleConsoleClear} />
+        <Console roundsTimes={roundsTimes} onClear={handleConsoleClear} />
       </main>
       <footer className="stopwatch__footer">Time App</footer>
     </div>
