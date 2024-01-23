@@ -121,6 +121,10 @@ const StopwatchPage = () => {
     ]);
   };
 
+  const handleConsoleClear = () => {
+    setRoundsTime([]);
+  };
+
   return (
     <div className="stopwatch">
       <header className="stopwatch__header">
@@ -150,7 +154,7 @@ const StopwatchPage = () => {
             </RoundButton>
           )}
         </div>
-        <Console roundsTime={roundsTime} />
+        <Console roundsTime={roundsTime} onClear={handleConsoleClear} />
       </main>
       <footer className="stopwatch__footer">Time App</footer>
     </div>
