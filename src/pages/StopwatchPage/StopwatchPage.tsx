@@ -1,7 +1,13 @@
 import './index.css';
 
 import { useEffect, useState } from 'react';
-import { HomeIcon, PlayIcon } from '@heroicons/react/24/solid';
+import {
+  FlagIcon,
+  HomeIcon,
+  PauseIcon,
+  PlayIcon,
+  StopIcon,
+} from '@heroicons/react/24/solid';
 
 import {
   ClockFace,
@@ -102,9 +108,23 @@ const StopwatchPage = () => {
       <main className="stopwatch__content">
         <ClockFace time={time} onTimeChange={setTime} />
         <div className="stopwatch__buttons">
-          <RoundButton onClick={handleClockStart}>
-            <PlayIcon width={48} />
-          </RoundButton>
+          {isStarted ? (
+            <>
+              <RoundButton onClick={handleClockStart}>
+                <FlagIcon width={48} />
+              </RoundButton>
+              <RoundButton onClick={handleClockStart}>
+                <PauseIcon width={48} />
+              </RoundButton>
+              <RoundButton onClick={handleClockStart}>
+                <StopIcon width={48} />
+              </RoundButton>
+            </>
+          ) : (
+            <RoundButton onClick={handleClockStart}>
+              <PlayIcon width={48} />
+            </RoundButton>
+          )}
         </div>
         <Console />
       </main>
