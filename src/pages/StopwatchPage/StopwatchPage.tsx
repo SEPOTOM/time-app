@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import {
   FlagIcon,
   HomeIcon,
-  PauseIcon,
   PlayIcon,
   StopIcon,
 } from '@heroicons/react/24/solid';
@@ -19,9 +18,11 @@ import {
 import { formatTimeValue } from '../../utils/formatTimeValue';
 
 import { TimeState } from '../../types';
+import PauseResumeButton from '../../components/PauseResumeButton/PauseResumeButton';
 
 const StopwatchPage = () => {
   const [isStarted, setIsStarted] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [time, setTime] = useState<TimeState>({
     hours: '00',
     minutes: '00',
@@ -83,7 +84,7 @@ const StopwatchPage = () => {
       });
     };
 
-    if (isStarted) {
+    if (isStarted && !isPaused) {
       intervalId = window.setInterval(incrementTime, 1000);
     }
 
@@ -92,10 +93,14 @@ const StopwatchPage = () => {
         clearInterval(intervalId);
       }
     };
-  }, [isStarted]);
+  }, [isStarted, isPaused]);
 
   const handleClockStart = () => {
     setIsStarted(true);
+  };
+
+  const handlePauseToggle = () => {
+    setIsPaused(!isPaused);
   };
 
   return (
@@ -113,9 +118,10 @@ const StopwatchPage = () => {
               <RoundButton onClick={handleClockStart}>
                 <FlagIcon width={48} />
               </RoundButton>
-              <RoundButton onClick={handleClockStart}>
-                <PauseIcon width={48} />
-              </RoundButton>
+              <PauseResumeButton
+                onClick={handlePauseToggle}
+                countdownPaused={isPaused}
+              />
               <RoundButton onClick={handleClockStart}>
                 <StopIcon width={48} />
               </RoundButton>
