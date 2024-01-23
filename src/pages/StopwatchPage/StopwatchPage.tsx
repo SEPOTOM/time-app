@@ -103,6 +103,16 @@ const StopwatchPage = () => {
     setIsPaused(!isPaused);
   };
 
+  const handleClockStop = () => {
+    setIsStarted(false);
+    setIsPaused(false);
+    setTime({
+      hours: '00',
+      minutes: '00',
+      seconds: '00',
+    });
+  };
+
   return (
     <div className="stopwatch">
       <header className="stopwatch__header">
@@ -122,7 +132,7 @@ const StopwatchPage = () => {
                 onClick={handlePauseToggle}
                 countdownPaused={isPaused}
               />
-              <RoundButton onClick={handleClockStart}>
+              <RoundButton onClick={handleClockStop}>
                 <StopIcon width={48} />
               </RoundButton>
             </>
