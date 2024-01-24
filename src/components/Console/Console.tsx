@@ -45,12 +45,11 @@ const Console = ({ roundsTimes, onClear }: Props) => {
 
               return (
                 <>
-                  {index !== roundsTimes.length - 1 &&
-                    roundsTimes[roundsTimes.length - 1]?.length !== 0 && (
-                      <p className="console__placeholder">
-                        ----------------------------
-                      </p>
-                    )}
+                  {index !== roundsTimes.length - 1 && (
+                    <p className="console__placeholder">
+                      ----------------------------
+                    </p>
+                  )}
                   <ul className="console__list" key={index}>
                     {roundsTime
                       .map((roundTime, innerIndex) => {
