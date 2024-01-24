@@ -6,36 +6,30 @@ import { TimeState } from '../../types';
 import { Props } from './types';
 
 const ClockFace = ({ time, onTimeChange }: Props) => {
-  const handleHoursChange = (newHours: string) => {
-    onTimeChange((t: TimeState) => ({ ...t, hours: newHours }));
-  };
+  const { hours, minutes, seconds } = time;
 
-  const handleMinutesChange = (newMinutes: string) => {
-    onTimeChange((t: TimeState) => ({ ...t, minutes: newMinutes }));
-  };
-
-  const handleSecondsChange = (newSeconds: string) => {
-    onTimeChange((t: TimeState) => ({ ...t, seconds: newSeconds }));
+  const handleTimeChange = (updatedTime: Partial<TimeState>) => {
+    onTimeChange((t: TimeState) => ({ ...t, ...updatedTime }));
   };
 
   return (
     <div className="clock-face">
       <ClockFaceInput
         maxValue={99}
-        value={time.hours}
-        onChange={handleHoursChange}
+        value={hours}
+        onChange={(newHours) => handleTimeChange({ hours: newHours })}
       />
       <span className="clock-face__separator">:</span>
       <ClockFaceInput
         maxValue={59}
-        value={time.minutes}
-        onChange={handleMinutesChange}
+        value={minutes}
+        onChange={(newMinutes) => handleTimeChange({ minutes: newMinutes })}
       />
       <span className="clock-face__separator">:</span>
       <ClockFaceInput
         maxValue={59}
-        value={time.seconds}
-        onChange={handleSecondsChange}
+        value={seconds}
+        onChange={(newSeconds) => handleTimeChange({ seconds: newSeconds })}
       />
     </div>
   );
