@@ -1,6 +1,6 @@
 import './index.css';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   FlagIcon,
   HomeIcon,
@@ -11,14 +11,14 @@ import {
 import {
   ClockFace,
   Console,
+  PauseResumeButton,
   RoundButton,
   RoundedButton,
 } from '../../components';
 
-import { formatTimeValue } from '../../utils/formatTimeValue';
+import { useStopwatchEffect } from './hooks';
 
 import { TimeState } from '../../types';
-import PauseResumeButton from '../../components/PauseResumeButton/PauseResumeButton';
 
 const StopwatchPage = () => {
   const [isStarted, setIsStarted] = useState(false);
@@ -28,77 +28,16 @@ const StopwatchPage = () => {
     minutes: '00',
     seconds: '00',
   });
-  const [roundsTimes, setRoundsTimes] = useState<string[][]>([]);
+  const [lapsTimes, setLapsTimes] = useState<string[][]>([[]]);
 
-  useEffect(() => {
-    let intervalId: number | null = null;
-
-    const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
-      const rawNewSeconds = Number(seconds) + 1;
-
-      if (rawNewSeconds > 59 && hours === '99' && minutes === '59') {
-        return '59';
-      } else if (rawNewSeconds > 59) {
-        return '00';
-      }
-
-      return formatTimeValue(rawNewSeconds);
-    };
-
-    const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
-      if (seconds !== '59') {
-        return minutes;
-      }
-
-      const rawNewMinutes = Number(minutes) + 1;
-
-      if (rawNewMinutes > 59 && hours === '99') {
-        return '59';
-      } else if (rawNewMinutes > 59) {
-        return '00';
-      }
-
-      return formatTimeValue(rawNewMinutes);
-    };
-
-    const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
-      if (seconds !== '59' || minutes !== '59') {
-        return hours;
-      }
-
-      const rawNewHours = Number(hours) + 1;
-
-      if (rawNewHours > 99) {
-        return '99';
-      }
-
-      return formatTimeValue(rawNewHours);
-    };
-
-    const incrementTime = () => {
-      setTime((t: TimeState) => {
-        return {
-          hours: getNewHours(t),
-          minutes: getNewMinutes(t),
-          seconds: getNewSeconds(t),
-        };
-      });
-    };
-
-    if (isStarted && !isPaused) {
-      intervalId = window.setInterval(incrementTime, 1000);
-    }
-
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [isStarted, isPaused]);
+  useStopwatchEffect(isStarted, isPaused, setTime);
 
   const handleClockStart = () => {
     setIsStarted(true);
-    setRoundsTimes([...roundsTimes, []]);
+
+    if (lapsTimes[lapsTimes.length - 1].length > 0) {
+      setLapsTimes([...lapsTimes, []]);
+    }
   };
 
   const handlePauseToggle = () => {
@@ -116,17 +55,17 @@ const StopwatchPage = () => {
   };
 
   const handleRoundAdd = () => {
-    setRoundsTimes([
-      ...roundsTimes.slice(0, roundsTimes.length - 1),
-      [
-        ...roundsTimes[roundsTimes.length - 1],
-        `${time.hours}:${time.minutes}:${time.seconds}`,
-      ],
+    const lastLapsTime = lapsTimes[lapsTimes.length - 1];
+    const lapTime = `${time.hours}:${time.minutes}:${time.seconds}`;
+
+    setLapsTimes([
+      ...lapsTimes.slice(0, lapsTimes.length - 1),
+      [...lastLapsTime, lapTime],
     ]);
   };
 
   const handleConsoleClear = () => {
-    setRoundsTimes([[]]);
+    setLapsTimes([[]]);
   };
 
   return (
@@ -146,7 +85,7 @@ const StopwatchPage = () => {
               </RoundButton>
               <PauseResumeButton
                 onClick={handlePauseToggle}
-                countdownPaused={isPaused}
+                isPaused={isPaused}
               />
               <RoundButton onClick={handleClockStop}>
                 <StopIcon width={48} />
@@ -158,7 +97,7 @@ const StopwatchPage = () => {
             </RoundButton>
           )}
         </div>
-        <Console roundsTimes={roundsTimes} onClear={handleConsoleClear} />
+        <Console lapsTimes={lapsTimes} onClear={handleConsoleClear} />
       </main>
       <footer className="stopwatch__footer">Time App</footer>
     </div>
