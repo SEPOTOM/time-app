@@ -1,6 +1,11 @@
-import { MouseEvent } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
-export interface PauseResumeButtonProps {
-  onClick(e: MouseEvent<HTMLButtonElement>): void;
-  countdownPaused: boolean;
+import { TimeState } from '../../types';
+
+export interface TimerEffectProps {
+  isStarted: boolean;
+  isPaused: boolean;
+  isFinished: boolean;
+  setTime: Dispatch<SetStateAction<TimeState>>;
+  setIsFinished: Dispatch<SetStateAction<boolean>>;
 }

@@ -1,133 +1,58 @@
 import './index.css';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { HomeIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 
-import { ClockFace, RoundedButton, RoundButton } from '../../components';
-import PauseResumeButton from '../../components/PauseResumeButton/PauseResumeButton';
+import {
+  ClockFace,
+  RoundedButton,
+  RoundButton,
+  PauseResumeButton,
+} from '../../components';
 
-import { formatTimeValue } from '../../utils/formatTimeValue';
+import { useTimerEffect } from './hooks';
+
 import { isTimeZero } from './utils';
 
 import { TimeState } from '../../types';
 
+const INITIAL_TIME = {
+  hours: '00',
+  minutes: '00',
+  seconds: '00',
+};
+
 const TimerPage = () => {
-  const [countdownStarted, setCountdownStarted] = useState(false);
-  const [countdownPaused, setCountdownPaused] = useState(false);
-  const [countdownFinished, setCountdownFinished] = useState(false);
-  const [time, setTime] = useState<TimeState>({
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-  });
+  const [isStarted, setIsStarted] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  const [time, setTime] = useState<TimeState>(INITIAL_TIME);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  useEffect(() => {
-    let timeoutId: number | null = null;
-
-    const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
-      const rawNewSeconds = Number(seconds) - 1;
-
-      if (rawNewSeconds < 0 && hours === '00' && minutes === '00') {
-        return '00';
-      } else if (rawNewSeconds < 0) {
-        return '59';
-      }
-
-      return formatTimeValue(rawNewSeconds);
-    };
-
-    const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
-      if (seconds !== '00') {
-        return minutes;
-      }
-
-      const rawNewMinutes = Number(minutes) - 1;
-
-      if (rawNewMinutes < 0 && hours === '00') {
-        return '00';
-      } else if (rawNewMinutes < 0) {
-        return '59';
-      }
-
-      return formatTimeValue(rawNewMinutes);
-    };
-
-    const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
-      if (seconds !== '00' || minutes !== '00') {
-        return hours;
-      }
-
-      const rawNewHours = Number(hours) - 1;
-
-      if (rawNewHours < 0) {
-        return '00';
-      }
-
-      return formatTimeValue(rawNewHours);
-    };
-
-    const decreaseTime = () => {
-      setTime((t: TimeState) => {
-        if (isTimeZero(t)) {
-          setCountdownFinished(true);
-          return t;
-        }
-
-        return {
-          hours: getNewHours(t),
-          minutes: getNewMinutes(t),
-          seconds: getNewSeconds(t),
-        };
-      });
-
-      timeoutId = window.setTimeout(decreaseTime, 1000);
-    };
-
-    if (countdownStarted && !countdownPaused && !countdownFinished) {
-      timeoutId = window.setTimeout(decreaseTime, 1000);
-    }
-
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
-  }, [countdownStarted, countdownPaused, countdownFinished]);
-
-  useEffect(() => {
-    if (!audioRef.current) {
-      return;
-    }
-
-    if (countdownFinished) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-  }, [countdownFinished]);
+  useTimerEffect({
+    isFinished,
+    isPaused,
+    isStarted,
+    setIsFinished,
+    setTime,
+  });
 
   const handleCountdownStart = () => {
     if (!isTimeZero(time)) {
-      setCountdownStarted(true);
+      setIsStarted(true);
     }
   };
 
   const handleCountdownPauseResume = () => {
-    setCountdownPaused(!countdownPaused);
+    setIsPaused(!isPaused);
   };
 
   const handleCountdownStop = () => {
-    setCountdownStarted(false);
-    setCountdownPaused(false);
-    setCountdownFinished(false);
-    setTime({
-      hours: '00',
-      minutes: '00',
-      seconds: '00',
-    });
+    setIsStarted(false);
+    setIsPaused(false);
+    setIsFinished(false);
+    setTime(INITIAL_TIME);
   };
 
   return (
@@ -140,12 +65,12 @@ const TimerPage = () => {
       <main className="timer-page__content">
         <ClockFace time={time} onTimeChange={setTime} />
         <div className="timer-page__buttons">
-          {countdownStarted ? (
+          {isStarted ? (
             <>
-              {!countdownFinished && (
+              {!isFinished && (
                 <PauseResumeButton
                   onClick={handleCountdownPauseResume}
-                  countdownPaused={countdownPaused}
+                  isPaused={isPaused}
                 />
               )}
               <RoundButton onClick={handleCountdownStop}>
