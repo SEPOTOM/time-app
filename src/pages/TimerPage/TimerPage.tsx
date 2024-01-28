@@ -5,9 +5,9 @@ import { HomeIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 
 import {
   ClockFace,
-  RoundedButton,
   RoundButton,
   PauseResumeButton,
+  HomeButton,
 } from '../../components';
 
 import { useTimerEffect } from './hooks';
@@ -58,9 +58,9 @@ const TimerPage = () => {
   return (
     <div className="timer-page">
       <header className="timer-page__header">
-        <RoundedButton>
+        <HomeButton>
           <HomeIcon width={24} />
-        </RoundedButton>
+        </HomeButton>
       </header>
       <main className="timer-page__content">
         <ClockFace time={time} onTimeChange={setTime} />

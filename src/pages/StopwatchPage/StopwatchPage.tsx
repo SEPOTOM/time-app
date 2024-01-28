@@ -11,9 +11,9 @@ import {
 import {
   ClockFace,
   Console,
+  HomeButton,
   PauseResumeButton,
   RoundButton,
-  RoundedButton,
 } from '../../components';
 
 import { useStopwatchEffect } from './hooks';
@@ -71,9 +71,9 @@ const StopwatchPage = () => {
   return (
     <div className="stopwatch">
       <header className="stopwatch__header">
-        <RoundedButton>
+        <HomeButton>
           <HomeIcon width={24} />
-        </RoundedButton>
+        </HomeButton>
       </header>
       <main className="stopwatch__content">
         <ClockFace time={time} onTimeChange={setTime} />
