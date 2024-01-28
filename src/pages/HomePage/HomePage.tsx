@@ -1,15 +1,17 @@
+import { Link } from 'react-router-dom';
+
 import './index.css';
 
 const HomePage = () => {
   return (
     <div className="homepage">
       <header className="homepage__header">
-        <button className="homepage__button" type="button">
+        <Link className="homepage__button" to="/timer">
           TIMER
-        </button>
-        <button className="homepage__button" type="button">
+        </Link>
+        <Link className="homepage__button" to="/stopwatch">
           STOPWATCH
-        </button>
+        </Link>
       </header>
       <footer className="homepage__footer">Time App</footer>
     </div>
