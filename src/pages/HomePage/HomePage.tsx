@@ -1,6 +1,8 @@
+import './index.css';
+
 import { Link } from 'react-router-dom';
 
-import './index.css';
+import { Footer } from '../../components';
 
 const HomePage = () => {
   return (
@@ -13,7 +15,7 @@ const HomePage = () => {
           STOPWATCH
         </Link>
       </header>
-      <footer className="homepage__footer">Time App</footer>
+      <Footer />
     </div>
   );
 };

@@ -52,12 +52,3 @@
 .homepage__button:last-child:active {
   box-shadow: inset 1500px 0 1000px #000000;
 }
-
-.homepage__footer {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-
-  font-size: 3rem;
-  line-height: 150%;
-}

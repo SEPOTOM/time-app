@@ -1,0 +1,8 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  font-size: 3rem;
+  line-height: 150%;
+}

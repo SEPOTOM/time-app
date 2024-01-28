@@ -11,6 +11,7 @@ import {
 import {
   ClockFace,
   Console,
+  Footer,
   HomeButton,
   PauseResumeButton,
   RoundButton,
@@ -99,7 +100,7 @@ const StopwatchPage = () => {
         </div>
         <Console lapsTimes={lapsTimes} onClear={handleConsoleClear} />
       </main>
-      <footer className="stopwatch__footer">Time App</footer>
+      <Footer />
     </div>
   );
 };

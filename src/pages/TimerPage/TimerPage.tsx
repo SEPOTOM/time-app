@@ -8,6 +8,7 @@ import {
   RoundButton,
   PauseResumeButton,
   HomeButton,
+  Footer,
 } from '../../components';
 
 import { useTimerEffect } from './hooks';
@@ -84,7 +85,7 @@ const TimerPage = () => {
           )}
         </div>
       </main>
-      <footer className="timer-page__footer">Time App</footer>
+      <Footer />
       <audio src="./alarm_clock.mp3" loop hidden ref={audioRef}></audio>
     </div>
   );
