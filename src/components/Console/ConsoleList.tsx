@@ -16,12 +16,12 @@ const ConsoleList = ({ lapsTimes, lapsTime, index }: ListProps) => {
   return (
     <>
       {getSeparator()}
-      <ul className="console__list" key={index}>
+      <ul className="console__list">
         {lapsTime
-          .map((lapTime, index) => {
+          .map((lapTime, lapTimeIndex) => {
             return (
-              <li className="console__item" key={`list-item-${index}`}>
-                {formatIndex(index + 1)} Round -- {lapTime}
+              <li className="console__item" key={`list-item-${lapTimeIndex}`}>
+                {formatIndex(lapTimeIndex + 1)} Round -- {lapTime}
               </li>
             );
           })
