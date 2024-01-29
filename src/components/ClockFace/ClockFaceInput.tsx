@@ -10,9 +10,9 @@ const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    const REGEXP = /^[0-9]*$/;
+    const NUMBERS_REGEXP = /^[0-9]*$/;
 
-    if (!REGEXP.test(e.key) && e.key !== 'Backspace') {
+    if (!NUMBERS_REGEXP.test(e.key) && e.key !== 'Backspace') {
       e.preventDefault();
     }
   };
