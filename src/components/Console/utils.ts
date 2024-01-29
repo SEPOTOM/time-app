@@ -16,7 +16,7 @@ const formatIndex = (index: number): string => {
 };
 
 const hasLaps = (lapsTimes: string[][]): boolean => {
-  return lapsTimes.every((lapsTime) => lapsTime.length === 0);
+  return lapsTimes.some((lapsTime) => lapsTime.length !== 0);
 };
 
 export { formatIndex, hasLaps };

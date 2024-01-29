@@ -17,11 +17,11 @@ const Console = ({ lapsTimes, onClear }: Props) => {
       </div>
       <div className="console__content">
         {hasLaps(lapsTimes) ? (
+          <ConsoleLists lapsTimes={lapsTimes} />
+        ) : (
           <p className="console__placeholder">
             -- Rounds will be shown here --
           </p>
-        ) : (
-          <ConsoleLists lapsTimes={lapsTimes} />
         )}
       </div>
     </div>
