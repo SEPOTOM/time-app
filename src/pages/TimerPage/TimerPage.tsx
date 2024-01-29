@@ -45,7 +45,7 @@ const TimerPage = () => {
     }
   };
 
-  const handleCountdownPauseResume = () => {
+  const handlePauseToggle = () => {
     setIsPaused(!isPaused);
   };
 
@@ -70,7 +70,7 @@ const TimerPage = () => {
             <>
               {!isFinished && (
                 <PauseResumeButton
-                  onClick={handleCountdownPauseResume}
+                  onClick={handlePauseToggle}
                   isPaused={isPaused}
                 />
               )}
