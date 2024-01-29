@@ -21,14 +21,16 @@ import { useStopwatchEffect } from './hooks';
 
 import { TimeState } from '../../types';
 
+const INITIAL_TIME = {
+  hours: '00',
+  minutes: '00',
+  seconds: '00',
+};
+
 const StopwatchPage = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [time, setTime] = useState<TimeState>({
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-  });
+  const [time, setTime] = useState<TimeState>(INITIAL_TIME);
   const [lapsTimes, setLapsTimes] = useState<string[][]>([[]]);
 
   useStopwatchEffect(isStarted, isPaused, setTime);
@@ -48,11 +50,7 @@ const StopwatchPage = () => {
   const handleClockStop = () => {
     setIsStarted(false);
     setIsPaused(false);
-    setTime({
-      hours: '00',
-      minutes: '00',
-      seconds: '00',
-    });
+    setTime(INITIAL_TIME);
   };
 
   const handleRoundAdd = () => {

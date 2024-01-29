@@ -1,4 +1,4 @@
-import { Dispatch, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
 import { getNewHours, getNewMinutes, getNewSeconds } from './utils';
 
@@ -7,7 +7,7 @@ import { TimeState } from '../../types';
 const useStopwatchEffect = (
   isStarted: boolean,
   isPaused: boolean,
-  setTime: Dispatch<React.SetStateAction<TimeState>>
+  setTime: Dispatch<SetStateAction<TimeState>>
 ) => {
   useEffect(() => {
     let intervalId: number | null = null;
