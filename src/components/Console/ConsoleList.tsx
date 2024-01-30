@@ -21,7 +21,7 @@ const ConsoleList = ({ lapsTimes, lapsTime, index }: ListProps) => {
           .map((lapTime, lapTimeIndex) => {
             return (
               <li className="console__item" key={`list-item-${lapTimeIndex}`}>
-                {formatIndex(lapTimeIndex + 1)} Round -- {lapTime}
+                {formatIndex(lapTimeIndex + 1)} Lap -- {lapTime}
               </li>
             );
           })
