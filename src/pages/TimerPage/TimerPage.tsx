@@ -1,6 +1,6 @@
 import './index.css';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { HomeIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 
 import {
@@ -38,6 +38,19 @@ const TimerPage = () => {
     setIsFinished,
     setTime,
   });
+
+  useEffect(() => {
+    if (!audioRef.current) {
+      return;
+    }
+
+    if (isFinished) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [isFinished]);
 
   const handleCountdownStart = () => {
     if (!isTimeZero(time)) {
