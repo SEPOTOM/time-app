@@ -1,0 +1,13 @@
+.header {
+  padding: 20px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  font-size: 3rem;
+  line-height: 150%;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
