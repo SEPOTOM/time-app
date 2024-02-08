@@ -14,16 +14,20 @@ const RootLayout = () => {
 
   const theme = isDarkTheme ? Themes.DARK : Themes.LIGHT;
 
+  const className = `root-layout root-layout_${theme}`;
+
   return (
     <ThemeContext.Provider value={theme}>
-      <header className="header">
-        <HomeButton>
-          <HomeIcon width={24} />
-        </HomeButton>
-        <ThemeSwitcher isActive={isDarkTheme} onClick={handleThemeToggle} />
-      </header>
-      <Outlet />
-      <footer className="footer">Time App</footer>
+      <div className={className}>
+        <header className="root-layout__header">
+          <HomeButton>
+            <HomeIcon width={24} />
+          </HomeButton>
+          <ThemeSwitcher isActive={isDarkTheme} onClick={handleThemeToggle} />
+        </header>
+        <Outlet />
+        <footer className="root-layout__footer">Time App</footer>
+      </div>
     </ThemeContext.Provider>
   );
 };
