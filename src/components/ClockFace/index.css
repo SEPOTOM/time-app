@@ -21,11 +21,18 @@
   line-height: 120%;
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
+  color: var(--main-light-color);
 
   border: none;
 
   appearance: none;
   -moz-appearance: textfield;
+}
+
+.clock-face__input_dark {
+  color: var(--main-dark-color);
+
+  background-color: var(--secondary-dark-color);
 }
 
 .clock-face__input:focus {
