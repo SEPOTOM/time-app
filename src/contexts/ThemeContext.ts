@@ -11,4 +11,4 @@ const useTheme = () => {
   return useContext(ThemeContext);
 };
 
-export { ThemeContext as default, useTheme };
+export { ThemeContext as default, useTheme, Themes };
