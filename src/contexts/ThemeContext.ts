@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 enum Themes {
   LIGHT = 'light',
@@ -7,4 +7,8 @@ enum Themes {
 
 const ThemeContext = createContext(Themes.LIGHT);
 
-export default ThemeContext;
+const useTheme = () => {
+  return useContext(ThemeContext);
+};
+
+export { ThemeContext as default, useTheme };
