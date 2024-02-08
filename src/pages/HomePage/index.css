@@ -5,6 +5,8 @@
   padding: 0 2px;
 
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+
+  background-color: var(--secondary-light-color);
 }
 
 .homepage__button {
@@ -20,29 +22,57 @@
   font-family: inherit;
   letter-spacing: 0.2rem;
   text-decoration: none;
-  color: #000000;
+  color: var(--main-light-color);
 
   background-color: transparent;
-  border: 4px solid #000000;
+  border: 4px solid var(--main-light-color);
   cursor: pointer;
 
   transition: all 0.3s ease 0s;
 }
 
 .homepage__button:hover {
-  box-shadow: inset 0 0 100px #000000;
+  box-shadow: inset 0 0 100px var(--main-light-color);
 }
 
 .homepage__button:active {
-  color: #ffffff;
+  color: var(--secondary-light-color);
 
   transition: all 0.1s ease 0s;
 }
 
 .homepage__button:first-child:active {
-  box-shadow: inset -1500px 0 1000px #000000;
+  box-shadow: inset -1500px 0 1000px var(--main-light-color);
 }
 
 .homepage__button:last-child:active {
-  box-shadow: inset 1500px 0 1000px #000000;
+  box-shadow: inset 1500px 0 1000px var(--main-light-color);
+}
+
+/* DARK THEME */
+
+.homepage_dark {
+  background-color: var(--secondary-dark-color);
+}
+
+.homepage_dark .homepage__button {
+  color: var(--main-dark-color);
+
+  border-color: var(--main-dark-color);
+}
+
+.homepage_dark .homepage__button:hover {
+  box-shadow: inset 0 0 100px var(--main-dark-color);
+}
+
+.homepage_dark .homepage__button:active {
+  color: var(--secondary-dark-color);
+}
+
+.homepage_dark .homepage__button:first-child:active {
+  box-shadow: inset -1500px 0 1000px var(--main-dark-color);
+}
+
+.homepage_dark .homepage__button:last-child:active {
+  box-shadow: inset 1500px 0 1000px var(--main-dark-color);
 }

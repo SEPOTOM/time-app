@@ -2,9 +2,15 @@ import './index.css';
 
 import { Link } from 'react-router-dom';
 
+import { useTheme } from '../../contexts/ThemeContext';
+
 const HomePage = () => {
+  const theme = useTheme();
+
+  const homePageClassName = `homepage homepage_${theme}`;
+
   return (
-    <main className="homepage">
+    <main className={homePageClassName}>
       <Link className="homepage__button" to="/timer">
         TIMER
       </Link>
