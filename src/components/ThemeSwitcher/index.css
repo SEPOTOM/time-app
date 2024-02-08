@@ -7,10 +7,10 @@
   width: 60px;
   padding: 5px;
 
-  color: #ffffff;
+  color: var(--secondary-light-color);
 
   background-color: transparent;
-  border: 2px solid #000000;
+  border: 2px solid var(--main-light-color);
   border-radius: 20px;
   cursor: pointer;
 }
@@ -28,8 +28,8 @@
 
   width: 30px;
 
-  background-color: #000000;
-  border: 2px solid #000000;
+  background-color: var(--main-light-color);
+  border: 2px solid var(--main-light-color);
   border-radius: 50%;
 
   transition: transform 0.3s ease-in 0s;
@@ -37,4 +37,17 @@
 
 .theme-switcher__dot_active {
   transform: translate(76%, 0);
+}
+
+/* DARK THEME */
+
+.theme-switcher_dark {
+  color: var(--secondary-dark-color);
+
+  border-color: var(--main-dark-color);
+}
+
+.theme-switcher_dark .theme-switcher__dot {
+  background-color: var(--main-dark-color);
+  border-color: var(--main-dark-color);
 }
