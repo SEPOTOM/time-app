@@ -1,3 +1,10 @@
+:root {
+  --main-light-color: #000000;
+  --secondary-light-color: #ffffff;
+  --main-dark-color: #ffffff;
+  --secondary-dark-color: #000000;
+}
+
 html {
   height: 100%;
 
