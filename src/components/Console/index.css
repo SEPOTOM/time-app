@@ -37,6 +37,7 @@
   font-size: 2rem;
   line-height: 130%;
   letter-spacing: 0.2em;
+  color: var(--main-light-color);
 }
 
 .console__button {
@@ -68,6 +69,8 @@
   font-style: italic;
   font-size: 1.6rem;
   line-height: 130%;
+
+  color: #000000;
 }
 
 .console__list {
@@ -84,4 +87,6 @@
   font-weight: 600;
   font-size: 1.8rem;
   line-height: 150%;
+
+  color: #000000;
 }
