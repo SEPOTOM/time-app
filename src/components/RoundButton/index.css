@@ -2,8 +2,10 @@
   display: inline-flex;
   padding: 40px;
 
+  color: var(--main-light-color);
+
   background-color: transparent;
-  border: 2px solid #000000;
+  border: 2px solid var(--main-light-color);
   border-radius: 50%;
   cursor: pointer;
 
@@ -11,13 +13,31 @@
 }
 
 .round-button:hover {
-  box-shadow: inset -5px -5px 10px #000000;
+  box-shadow: inset -5px -5px 10px var(--main-light-color);
 }
 
 .round-button:active {
-  color: #ffffff;
+  color: var(--secondary-light-color);
 
-  box-shadow: inset -50px -50px 100px #000000;
+  box-shadow: inset -50px -50px 100px var(--main-light-color);
 
   transition: all 0.1s ease 0s;
+}
+
+/* DARK THEME */
+
+.round-button_dark {
+  color: var(--main-dark-color);
+
+  border-color: var(--main-dark-color);
+}
+
+.round-button_dark:hover {
+  box-shadow: inset -5px -5px 10px var(--main-dark-color);
+}
+
+.round-button_dark:active {
+  color: var(--secondary-dark-color);
+
+  box-shadow: inset -50px -50px 100px var(--main-dark-color);
 }
