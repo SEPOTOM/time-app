@@ -9,10 +9,8 @@ import { Props } from './types';
 const HomeButton = ({ children }: Props) => {
   const theme = useTheme();
 
-  const className = `home-button home-button_${theme}`;
-
   return (
-    <Link className={className} to="/">
+    <Link className={`home-button home-button_${theme}`} to="/">
       {children}
     </Link>
   );
