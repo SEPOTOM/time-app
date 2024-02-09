@@ -7,10 +7,12 @@ import { Props } from './types';
 const RoundButton = ({ children, onClick }: Props) => {
   const theme = useTheme();
 
-  const className = `round-button round-button_${theme}`;
-
   return (
-    <button className={className} type="button" onClick={onClick}>
+    <button
+      className={`round-button round-button_${theme}`}
+      type="button"
+      onClick={onClick}
+    >
       {children}
     </button>
   );
