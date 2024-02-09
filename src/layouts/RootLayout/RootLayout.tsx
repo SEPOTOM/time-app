@@ -1,9 +1,12 @@
-import { HomeIcon } from '@heroicons/react/24/solid';
-import { HomeButton, ThemeSwitcher } from '../../components';
 import './index.css';
-import { Outlet } from 'react-router-dom';
-import ThemeContext, { Themes } from '../../contexts/ThemeContext';
+
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { HomeIcon } from '@heroicons/react/24/solid';
+
+import { HomeButton, ThemeSwitcher } from '../../components';
+
+import ThemeContext, { Themes } from '../../contexts/ThemeContext';
 
 const RootLayout = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -14,11 +17,9 @@ const RootLayout = () => {
 
   const theme = isDarkTheme ? Themes.DARK : Themes.LIGHT;
 
-  const className = `root-layout root-layout_${theme}`;
-
   return (
     <ThemeContext.Provider value={theme}>
-      <div className={className}>
+      <div className={`root-layout root-layout_${theme}`}>
         <header className="root-layout__header">
           <HomeButton>
             <HomeIcon width={24} />
