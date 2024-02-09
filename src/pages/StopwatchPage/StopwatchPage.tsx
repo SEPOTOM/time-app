@@ -47,12 +47,12 @@ const StopwatchPage = () => {
   };
 
   const handleRoundAdd = () => {
-    const lastLapsTime = lapsTimes[lapsTimes.length - 1];
+    const lastLapTimes = lapsTimes[lapsTimes.length - 1];
     const lapTime = `${time.hours}:${time.minutes}:${time.seconds}`;
 
     setLapsTimes([
       ...lapsTimes.slice(0, lapsTimes.length - 1),
-      [...lastLapsTime, lapTime],
+      [...lastLapTimes, lapTime],
     ]);
   };
 
