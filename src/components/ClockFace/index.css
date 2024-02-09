@@ -29,12 +29,6 @@
   -moz-appearance: textfield;
 }
 
-.clock-face__input_dark {
-  color: var(--main-dark-color);
-
-  background-color: var(--secondary-dark-color);
-}
-
 .clock-face__input:focus {
   outline: none;
 }
@@ -48,4 +42,12 @@
 .clock-face__input::-webkit-outer-spin-button,
 .clock-face__input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+/* DARK THEME */
+
+.clock-face__input_dark {
+  color: var(--main-dark-color);
+
+  background-color: var(--secondary-dark-color);
 }

@@ -43,11 +43,9 @@ const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
     }
   };
 
-  const className = `clock-face__input clock-face__input_${theme}`;
-
   return (
     <input
-      className={className}
+      className={`clock-face__input clock-face__input_${theme}`}
       type="number"
       inputMode="numeric"
       value={value}
