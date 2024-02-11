@@ -1,19 +1,27 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import RootLayout from './layouts/RootLayout/RootLayout';
+
 import { HomePage, StopwatchPage, TimerPage } from './pages';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
-  },
-  {
-    path: '/timer',
-    element: <TimerPage />,
-  },
-  {
-    path: '/stopwatch',
-    element: <StopwatchPage />,
+    element: <RootLayout />,
+    children: [
+      {
+        path: '/',
+        element: <HomePage />,
+      },
+      {
+        path: '/timer',
+        element: <TimerPage />,
+      },
+      {
+        path: '/stopwatch',
+        element: <StopwatchPage />,
+      },
+    ],
   },
 ]);
 

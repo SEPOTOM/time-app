@@ -1,10 +1,14 @@
 import { MouseEvent, KeyboardEvent, ChangeEvent, FocusEvent } from 'react';
 
+import { useTheme } from '../../contexts/ThemeContext';
+
 import { formatTimeValue } from '../../utils/formatTimeValue';
 
 import { InputProps } from './types';
 
 const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
+  const theme = useTheme();
+
   const handleClick = (e: MouseEvent<HTMLInputElement>) => {
     e.currentTarget.select();
   };
@@ -41,7 +45,7 @@ const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
 
   return (
     <input
-      className="clock-face__input"
+      className={`clock-face__input clock-face__input_${theme}`}
       type="number"
       inputMode="numeric"
       value={value}

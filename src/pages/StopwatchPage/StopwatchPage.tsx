@@ -1,18 +1,11 @@
 import './index.css';
 
 import { useState } from 'react';
-import {
-  FlagIcon,
-  HomeIcon,
-  PlayIcon,
-  StopIcon,
-} from '@heroicons/react/24/solid';
+import { FlagIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 
 import {
   ClockFace,
   Console,
-  Footer,
-  HomeButton,
   PauseResumeButton,
   RoundButton,
 } from '../../components';
@@ -54,12 +47,12 @@ const StopwatchPage = () => {
   };
 
   const handleRoundAdd = () => {
-    const lastLapsTime = lapsTimes[lapsTimes.length - 1];
+    const lastLapTimes = lapsTimes[lapsTimes.length - 1];
     const lapTime = `${time.hours}:${time.minutes}:${time.seconds}`;
 
     setLapsTimes([
       ...lapsTimes.slice(0, lapsTimes.length - 1),
-      [...lastLapsTime, lapTime],
+      [...lastLapTimes, lapTime],
     ]);
   };
 
@@ -68,38 +61,30 @@ const StopwatchPage = () => {
   };
 
   return (
-    <div className="stopwatch">
-      <header className="stopwatch__header">
-        <HomeButton>
-          <HomeIcon width={24} />
-        </HomeButton>
-      </header>
-      <main className="stopwatch__content">
-        <ClockFace time={time} onTimeChange={setTime} />
-        <div className="stopwatch__buttons">
-          {isStarted ? (
-            <>
-              <RoundButton onClick={handleRoundAdd}>
-                <FlagIcon width={48} />
-              </RoundButton>
-              <PauseResumeButton
-                onClick={handlePauseToggle}
-                isPaused={isPaused}
-              />
-              <RoundButton onClick={handleClockStop}>
-                <StopIcon width={48} />
-              </RoundButton>
-            </>
-          ) : (
-            <RoundButton onClick={handleClockStart}>
-              <PlayIcon width={48} />
+    <main className="stopwatch">
+      <ClockFace time={time} onTimeChange={setTime} />
+      <div className="stopwatch__buttons">
+        {isStarted ? (
+          <>
+            <RoundButton onClick={handleRoundAdd}>
+              <FlagIcon width={48} />
             </RoundButton>
-          )}
-        </div>
-        <Console lapsTimes={lapsTimes} onClear={handleConsoleClear} />
-      </main>
-      <Footer />
-    </div>
+            <PauseResumeButton
+              onClick={handlePauseToggle}
+              isPaused={isPaused}
+            />
+            <RoundButton onClick={handleClockStop}>
+              <StopIcon width={48} />
+            </RoundButton>
+          </>
+        ) : (
+          <RoundButton onClick={handleClockStart}>
+            <PlayIcon width={48} />
+          </RoundButton>
+        )}
+      </div>
+      <Console lapsTimes={lapsTimes} onClear={handleConsoleClear} />
+    </main>
   );
 };
 

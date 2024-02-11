@@ -2,7 +2,7 @@
   display: inline-flex;
   padding: 8px;
 
-  color: #000000;
+  color: var(--main-light-color);
 
   background-color: transparent;
   border: none;
@@ -13,13 +13,29 @@
 }
 
 .home-button:hover {
-  box-shadow: inset -1px -1px 2px #000000;
+  box-shadow: inset -1px -1px 2px var(--main-light-color);
 }
 
 .home-button:active {
-  color: #ffffff;
+  color: var(--secondary-light-color);
 
-  box-shadow: inset -15px -15px 30px #000000;
+  box-shadow: inset -15px -15px 30px var(--main-light-color);
 
   transition: box-shadow 0.1s ease 0s;
+}
+
+/* DARK THEME */
+
+.home-button_dark {
+  color: var(--main-dark-color);
+}
+
+.home-button_dark:hover {
+  box-shadow: inset -1px -1px 2px var(--main-dark-color);
+}
+
+.home-button_dark:active {
+  color: var(--secondary-dark-color);
+
+  box-shadow: inset -15px -15px 30px var(--main-dark-color);
 }

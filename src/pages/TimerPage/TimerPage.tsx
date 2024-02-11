@@ -1,15 +1,9 @@
 import './index.css';
 
 import { useState, useRef, useEffect } from 'react';
-import { HomeIcon, PlayIcon, StopIcon } from '@heroicons/react/24/solid';
+import { PlayIcon, StopIcon } from '@heroicons/react/24/solid';
 
-import {
-  ClockFace,
-  RoundButton,
-  PauseResumeButton,
-  HomeButton,
-  Footer,
-} from '../../components';
+import { ClockFace, RoundButton, PauseResumeButton } from '../../components';
 
 import { useTimerEffect } from './hooks';
 
@@ -70,13 +64,8 @@ const TimerPage = () => {
   };
 
   return (
-    <div className="timer-page">
-      <header className="timer-page__header">
-        <HomeButton>
-          <HomeIcon width={24} />
-        </HomeButton>
-      </header>
-      <main className="timer-page__content">
+    <>
+      <main className="timer-page">
         <ClockFace time={time} onTimeChange={setTime} />
         <div className="timer-page__buttons">
           {isStarted ? (
@@ -98,9 +87,8 @@ const TimerPage = () => {
           )}
         </div>
       </main>
-      <Footer />
       <audio src="./alarm_clock.mp3" loop hidden ref={audioRef}></audio>
-    </div>
+    </>
   );
 };
 

@@ -2,21 +2,20 @@ import './index.css';
 
 import { Link } from 'react-router-dom';
 
-import { Footer } from '../../components';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const HomePage = () => {
+  const theme = useTheme();
+
   return (
-    <div className="homepage">
-      <header className="homepage__header">
-        <Link className="homepage__button" to="/timer">
-          TIMER
-        </Link>
-        <Link className="homepage__button" to="/stopwatch">
-          STOPWATCH
-        </Link>
-      </header>
-      <Footer />
-    </div>
+    <main className={`homepage homepage_${theme}`}>
+      <Link className="homepage__button" to="/timer">
+        TIMER
+      </Link>
+      <Link className="homepage__button" to="/stopwatch">
+        STOPWATCH
+      </Link>
+    </main>
   );
 };
 
