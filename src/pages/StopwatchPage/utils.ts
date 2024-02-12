@@ -8,7 +8,7 @@ const MAX_SECONDS = '59';
 
 const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
   if (
-    hours === MAX_HOURS &&
+    (hours === MAX_HOURS || !hours) &&
     minutes === MAX_MINUTES &&
     seconds === MAX_SECONDS
   ) {
