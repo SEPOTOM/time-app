@@ -1,5 +1,6 @@
 export interface TimeState {
-  hours: string;
   minutes: string;
   seconds: string;
+  hours?: string;
+  milliseconds?: string;
 }
