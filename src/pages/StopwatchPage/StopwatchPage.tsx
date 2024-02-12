@@ -62,7 +62,17 @@ const StopwatchPage = () => {
 
   return (
     <main className="stopwatch">
-      <ClockFace time={time} onTimeChange={setTime} />
+      <div className="stopwatch__row">
+        <ClockFace time={time} onTimeChange={setTime} />
+        <div className="stopwatch__switcher">
+          <button className="stopwatch__option" type="button" disabled>
+            h:m:s
+          </button>
+          <button className="stopwatch__option" type="button">
+            m:s:ms
+          </button>
+        </div>
+      </div>
       <div className="stopwatch__buttons">
         {isStarted ? (
           <>
