@@ -32,7 +32,7 @@ const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
   const rawNewMinutes = Number(minutes) + 1;
 
   if (rawNewMinutes > 59) {
-    return hours === MAX_HOURS ? MAX_MINUTES : '00';
+    return hours === MAX_HOURS || !hours ? MAX_MINUTES : '00';
   }
 
   return formatTimeValue(rawNewMinutes);
