@@ -14,11 +14,16 @@ const useStopwatchEffect = (
 
     const incrementTime = () => {
       setTime((t: TimeState) => {
-        return {
-          hours: getNewHours(t),
+        const newT: TimeState = {
           minutes: getNewMinutes(t),
           seconds: getNewSeconds(t),
         };
+
+        if ('hours' in t) {
+          newT.hours = getNewHours(t);
+        }
+
+        return newT;
       });
     };
 
