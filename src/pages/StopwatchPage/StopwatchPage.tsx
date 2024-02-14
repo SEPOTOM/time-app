@@ -13,18 +13,26 @@ import {
 import { useStopwatchEffect } from './hooks';
 
 import { TimeState } from '../../types';
+import { Modes } from './types';
 
-const INITIAL_TIME = {
+const HMS_ZERO_TIME: TimeState = {
   hours: '00',
   minutes: '00',
   seconds: '00',
 };
 
+const MSMS_ZERO_TIME: TimeState = {
+  minutes: '00',
+  seconds: '00',
+  milliseconds: '00',
+};
+
 const StopwatchPage = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [time, setTime] = useState<TimeState>(INITIAL_TIME);
+  const [time, setTime] = useState<TimeState>(HMS_ZERO_TIME);
   const [lapsTimes, setLapsTimes] = useState<string[][]>([[]]);
+  const [mode, setMode] = useState<Modes>(Modes.HMS);
 
   useStopwatchEffect(isStarted, isPaused, setTime);
 
@@ -40,10 +48,10 @@ const StopwatchPage = () => {
     setIsPaused(!isPaused);
   };
 
-  const handleClockStop = () => {
+  const handleClockStop = (currentMode: Modes) => {
     setIsStarted(false);
     setIsPaused(false);
-    setTime(INITIAL_TIME);
+    setTime(currentMode === Modes.HMS ? HMS_ZERO_TIME : MSMS_ZERO_TIME);
   };
 
   const handleRoundAdd = () => {
@@ -60,15 +68,30 @@ const StopwatchPage = () => {
     setLapsTimes([[]]);
   };
 
+  const handleModeChange = (newMode: Modes) => {
+    handleClockStop(newMode);
+    setMode(newMode);
+  };
+
   return (
     <main className="stopwatch">
       <div className="stopwatch__row">
         <ClockFace time={time} onTimeChange={setTime} />
         <div className="stopwatch__switcher">
-          <button className="stopwatch__option" type="button" disabled>
+          <button
+            className="stopwatch__option"
+            type="button"
+            disabled={mode === Modes.HMS}
+            onClick={() => handleModeChange(Modes.HMS)}
+          >
             h:m:s
           </button>
-          <button className="stopwatch__option" type="button">
+          <button
+            className="stopwatch__option"
+            type="button"
+            disabled={mode === Modes.MSMS}
+            onClick={() => handleModeChange(Modes.MSMS)}
+          >
             m:s:ms
           </button>
         </div>
@@ -83,7 +106,7 @@ const StopwatchPage = () => {
               onClick={handlePauseToggle}
               isPaused={isPaused}
             />
-            <RoundButton onClick={handleClockStop}>
+            <RoundButton onClick={() => handleClockStop(mode)}>
               <StopIcon width={48} />
             </RoundButton>
           </>
