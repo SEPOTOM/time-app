@@ -1,6 +1,11 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 
-import { getNewHours, getNewMinutes, getNewSeconds } from './utils';
+import {
+  getNewHours,
+  getNewMilliseconds,
+  getNewMinutes,
+  getNewSeconds,
+} from './utils';
 
 import { TimeState } from '../../types';
 
@@ -18,6 +23,10 @@ const useStopwatchEffect = (
           minutes: getNewMinutes(t),
           seconds: getNewSeconds(t),
         };
+
+        if ('milliseconds' in t) {
+          newT.milliseconds = getNewMilliseconds(t);
+        }
 
         if ('hours' in t) {
           newT.hours = getNewHours(t);

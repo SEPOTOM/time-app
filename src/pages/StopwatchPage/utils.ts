@@ -5,6 +5,25 @@ import { TimeState } from '../../types';
 const MAX_HOURS = '99';
 const MAX_MINUTES = '59';
 const MAX_SECONDS = '59';
+const MAX_MILLISECONDS = '99';
+
+const getNewMilliseconds = ({
+  milliseconds,
+  seconds,
+  minutes,
+}: TimeState): string => {
+  if (seconds === MAX_SECONDS && minutes === MAX_MINUTES) {
+    return MAX_MILLISECONDS;
+  }
+
+  const rawNewMilliseconds = Number(milliseconds || -1) + 1;
+
+  if (rawNewMilliseconds > 99) {
+    return '00';
+  }
+
+  return formatTimeValue(rawNewMilliseconds);
+};
 
 const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
   if (
@@ -52,4 +71,4 @@ const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
   return formatTimeValue(rawNewHours);
 };
 
-export { getNewSeconds, getNewMinutes, getNewHours };
+export { getNewMilliseconds, getNewSeconds, getNewMinutes, getNewHours };
