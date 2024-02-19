@@ -25,13 +25,22 @@ const getNewMilliseconds = ({
   return formatTimeValue(rawNewMilliseconds);
 };
 
-const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
+const getNewSeconds = ({
+  milliseconds,
+  seconds,
+  minutes,
+  hours,
+}: TimeState): string => {
   if (
     (hours === MAX_HOURS || !hours) &&
     minutes === MAX_MINUTES &&
     seconds === MAX_SECONDS
   ) {
     return MAX_SECONDS;
+  }
+
+  if (milliseconds && milliseconds !== MAX_MILLISECONDS) {
+    return seconds;
   }
 
   const rawNewSeconds = Number(seconds) + 1;
