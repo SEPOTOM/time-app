@@ -58,7 +58,7 @@ const StopwatchPage = () => {
     const lastLapTimes = lapsTimes[lapsTimes.length - 1];
     const hours = time.hours ? `${time.hours}:` : '';
     const milliseconds = time.milliseconds ? `:${time.milliseconds}` : '';
-    const lapTime = `${hours}${time.minutes}:${time.seconds}${milliseconds}`;
+    const lapTime = `${hours}${time.minutes}:${time.seconds}${milliseconds} (${mode})`;
 
     setLapsTimes([
       ...lapsTimes.slice(0, lapsTimes.length - 1),
