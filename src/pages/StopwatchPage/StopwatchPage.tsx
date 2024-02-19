@@ -34,7 +34,7 @@ const StopwatchPage = () => {
   const [lapsTimes, setLapsTimes] = useState<string[][]>([[]]);
   const [mode, setMode] = useState<Modes>(Modes.HMS);
 
-  useStopwatchEffect(isStarted, isPaused, setTime);
+  useStopwatchEffect(isStarted, isPaused, mode, setTime);
 
   const handleClockStart = () => {
     setIsStarted(true);
