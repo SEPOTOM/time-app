@@ -52,8 +52,16 @@ const getNewSeconds = ({
   return formatTimeValue(rawNewSeconds);
 };
 
-const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
-  if (seconds !== MAX_SECONDS) {
+const getNewMinutes = ({
+  milliseconds,
+  seconds,
+  minutes,
+  hours,
+}: TimeState): string => {
+  if (
+    seconds !== MAX_SECONDS ||
+    (milliseconds !== MAX_MILLISECONDS && milliseconds)
+  ) {
     return minutes;
   }
 
