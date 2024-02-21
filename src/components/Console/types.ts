@@ -10,5 +10,5 @@ export interface ListsProps {
 export interface ListProps {
   lapsTimes: string[][];
   index: number;
-  lapsTime: string[];
+  lapTimes: string[];
 }

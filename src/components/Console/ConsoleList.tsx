@@ -4,7 +4,7 @@ import { formatIndex } from './utils';
 
 import { ListProps } from './types';
 
-const ConsoleList = ({ lapsTimes, lapsTime, index }: ListProps) => {
+const ConsoleList = ({ lapsTimes, lapTimes, index }: ListProps) => {
   const getSeparator = (): ReactNode => {
     return (
       index !== lapsTimes.length - 1 && (
@@ -17,7 +17,7 @@ const ConsoleList = ({ lapsTimes, lapsTime, index }: ListProps) => {
     <>
       {getSeparator()}
       <ul className="console__list">
-        {lapsTime
+        {lapTimes
           .map((lapTime, lapTimeIndex) => {
             return (
               <li className="console__item" key={`list-item-${lapTimeIndex}`}>

@@ -12,7 +12,7 @@ const ConsoleLists = ({ lapsTimes }: ListsProps) => {
       return (
         <ConsoleList
           lapsTimes={lapsTimes}
-          lapsTime={lapsTime}
+          lapTimes={lapsTime}
           index={index}
           key={`lap-${index}`}
         />
