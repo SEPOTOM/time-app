@@ -80,7 +80,7 @@ const getNewMinutes = ({
 
 const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
   if (seconds !== MAX_SECONDS || minutes !== MAX_MINUTES) {
-    return hours || MAX_HOURS;
+    return hours || '00';
   }
 
   const rawNewHours = Number(hours) + 1;
