@@ -9,23 +9,14 @@ import {
   PauseResumeButton,
   RoundButton,
 } from '../../components';
+import StopwatchModeSwitcher from './StopwatchModeSwitcher';
 
 import { useStopwatchEffect } from './hooks';
 
 import { TimeState } from '../../types';
 import { Modes } from './types';
 
-const HMS_ZERO_TIME: TimeState = {
-  hours: '00',
-  minutes: '00',
-  seconds: '00',
-};
-
-const MSMS_ZERO_TIME: TimeState = {
-  minutes: '00',
-  seconds: '00',
-  milliseconds: '00',
-};
+import { HMS_ZERO_TIME, MSMS_ZERO_TIME } from './data';
 
 const StopwatchPage = () => {
   const [isStarted, setIsStarted] = useState(false);
@@ -42,10 +33,6 @@ const StopwatchPage = () => {
     if (lapsTimes[lapsTimes.length - 1].length > 0) {
       setLapsTimes([...lapsTimes, []]);
     }
-  };
-
-  const handlePauseToggle = () => {
-    setIsPaused(!isPaused);
   };
 
   const handleClockStop = (currentMode: Modes) => {
@@ -66,10 +53,6 @@ const StopwatchPage = () => {
     ]);
   };
 
-  const handleConsoleClear = () => {
-    setLapsTimes([[]]);
-  };
-
   const handleModeChange = (newMode: Modes) => {
     handleClockStop(newMode);
     setMode(newMode);
@@ -79,24 +62,7 @@ const StopwatchPage = () => {
     <main className="stopwatch">
       <div className="stopwatch__row">
         <ClockFace time={time} onTimeChange={setTime} />
-        <div className="stopwatch__switcher">
-          <button
-            className="stopwatch__option"
-            type="button"
-            disabled={mode === Modes.HMS}
-            onClick={() => handleModeChange(Modes.HMS)}
-          >
-            h:m:s
-          </button>
-          <button
-            className="stopwatch__option"
-            type="button"
-            disabled={mode === Modes.MSMS}
-            onClick={() => handleModeChange(Modes.MSMS)}
-          >
-            m:s:ms
-          </button>
-        </div>
+        <StopwatchModeSwitcher mode={mode} onModeChange={handleModeChange} />
       </div>
       <div className="stopwatch__buttons">
         {isStarted ? (
@@ -105,7 +71,7 @@ const StopwatchPage = () => {
               <FlagIcon width={48} />
             </RoundButton>
             <PauseResumeButton
-              onClick={handlePauseToggle}
+              onClick={() => setIsPaused(!isPaused)}
               isPaused={isPaused}
             />
             <RoundButton onClick={() => handleClockStop(mode)}>
@@ -118,7 +84,7 @@ const StopwatchPage = () => {
           </RoundButton>
         )}
       </div>
-      <Console lapsTimes={lapsTimes} onClear={handleConsoleClear} />
+      <Console lapsTimes={lapsTimes} onClear={() => setLapsTimes([[]])} />
     </main>
   );
 };
