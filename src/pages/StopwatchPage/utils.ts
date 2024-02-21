@@ -12,11 +12,15 @@ const getNewMilliseconds = ({
   seconds,
   minutes,
 }: TimeState): string => {
+  if (!milliseconds) {
+    return '00';
+  }
+
   if (seconds === MAX_SECONDS && minutes === MAX_MINUTES) {
     return MAX_MILLISECONDS;
   }
 
-  const rawNewMilliseconds = Number(milliseconds || -1) + 1;
+  const rawNewMilliseconds = Number(milliseconds) + 1;
 
   if (rawNewMilliseconds > 99) {
     return '00';
