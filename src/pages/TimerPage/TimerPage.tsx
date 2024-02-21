@@ -11,11 +11,7 @@ import { isTimeZero } from './utils';
 
 import { TimeState } from '../../types';
 
-const INITIAL_TIME = {
-  hours: '00',
-  minutes: '00',
-  seconds: '00',
-};
+import { INITIAL_TIME } from './data';
 
 const TimerPage = () => {
   const [isStarted, setIsStarted] = useState(false);
