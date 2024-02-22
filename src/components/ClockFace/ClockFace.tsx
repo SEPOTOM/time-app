@@ -14,7 +14,7 @@ const ClockFace = ({ time, onTimeChange }: Props) => {
 
   return (
     <div className="clock-face">
-      {hours && (
+      {typeof hours === 'string' && (
         <>
           <ClockFaceInput
             maxValue={99}
@@ -35,7 +35,7 @@ const ClockFace = ({ time, onTimeChange }: Props) => {
         value={seconds}
         onChange={(newSeconds) => handleTimeChange({ seconds: newSeconds })}
       />
-      {milliseconds && (
+      {typeof milliseconds === 'string' && (
         <>
           <span className="clock-face__separator">:</span>
           <ClockFaceInput
