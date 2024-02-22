@@ -16,7 +16,11 @@ const getNewMilliseconds = ({
     return '00';
   }
 
-  if (seconds === MAX_SECONDS && minutes === MAX_MINUTES) {
+  if (
+    seconds === MAX_SECONDS &&
+    minutes === MAX_MINUTES &&
+    milliseconds === MAX_MILLISECONDS
+  ) {
     return MAX_MILLISECONDS;
   }
 
