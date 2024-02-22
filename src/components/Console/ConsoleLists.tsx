@@ -4,15 +4,15 @@ import { ListsProps } from './types';
 
 const ConsoleLists = ({ lapsTimes }: ListsProps) => {
   return lapsTimes
-    .map((lapsTime, index) => {
-      if (lapsTime.length === 0) {
+    .map((lapTimes, index) => {
+      if (lapTimes.length === 0) {
         return null;
       }
 
       return (
         <ConsoleList
           lapsTimes={lapsTimes}
-          lapsTime={lapsTime}
+          lapTimes={lapTimes}
           index={index}
           key={`lap-${index}`}
         />

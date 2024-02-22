@@ -9,19 +9,15 @@ import { useTimerEffect } from './hooks';
 
 import { isTimeZero } from './utils';
 
-import { TimeState } from '../../types';
+import { HMSTimeState } from './types';
 
-const INITIAL_TIME = {
-  hours: '00',
-  minutes: '00',
-  seconds: '00',
-};
+import { INITIAL_TIME } from './data';
 
 const TimerPage = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const [time, setTime] = useState<TimeState>(INITIAL_TIME);
+  const [time, setTime] = useState<HMSTimeState>(INITIAL_TIME);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 

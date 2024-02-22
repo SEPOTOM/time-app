@@ -5,14 +5,50 @@ import { TimeState } from '../../types';
 const MAX_HOURS = '99';
 const MAX_MINUTES = '59';
 const MAX_SECONDS = '59';
+const MAX_MILLISECONDS = '99';
 
-const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
+const getNewMilliseconds = ({
+  milliseconds,
+  seconds,
+  minutes,
+}: TimeState): string => {
+  if (!milliseconds) {
+    return '00';
+  }
+
   if (
-    hours === MAX_HOURS &&
+    seconds === MAX_SECONDS &&
+    minutes === MAX_MINUTES &&
+    milliseconds === MAX_MILLISECONDS
+  ) {
+    return MAX_MILLISECONDS;
+  }
+
+  const rawNewMilliseconds = Number(milliseconds) + 1;
+
+  if (rawNewMilliseconds > 99) {
+    return '00';
+  }
+
+  return formatTimeValue(rawNewMilliseconds);
+};
+
+const getNewSeconds = ({
+  milliseconds,
+  seconds,
+  minutes,
+  hours,
+}: TimeState): string => {
+  if (
+    (hours === MAX_HOURS || !hours) &&
     minutes === MAX_MINUTES &&
     seconds === MAX_SECONDS
   ) {
     return MAX_SECONDS;
+  }
+
+  if (milliseconds && milliseconds !== MAX_MILLISECONDS) {
+    return seconds;
   }
 
   const rawNewSeconds = Number(seconds) + 1;
@@ -24,15 +60,23 @@ const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
   return formatTimeValue(rawNewSeconds);
 };
 
-const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
-  if (seconds !== MAX_SECONDS) {
+const getNewMinutes = ({
+  milliseconds,
+  seconds,
+  minutes,
+  hours,
+}: TimeState): string => {
+  if (
+    seconds !== MAX_SECONDS ||
+    (milliseconds !== MAX_MILLISECONDS && milliseconds)
+  ) {
     return minutes;
   }
 
   const rawNewMinutes = Number(minutes) + 1;
 
   if (rawNewMinutes > 59) {
-    return hours === MAX_HOURS ? MAX_MINUTES : '00';
+    return hours === MAX_HOURS || !hours ? MAX_MINUTES : '00';
   }
 
   return formatTimeValue(rawNewMinutes);
@@ -40,7 +84,7 @@ const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
 
 const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
   if (seconds !== MAX_SECONDS || minutes !== MAX_MINUTES) {
-    return hours;
+    return hours || '00';
   }
 
   const rawNewHours = Number(hours) + 1;
@@ -52,4 +96,4 @@ const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
   return formatTimeValue(rawNewHours);
 };
 
-export { getNewSeconds, getNewMinutes, getNewHours };
+export { getNewMilliseconds, getNewSeconds, getNewMinutes, getNewHours };

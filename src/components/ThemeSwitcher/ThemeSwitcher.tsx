@@ -9,9 +9,7 @@ import { Props } from './types';
 const ThemeSwitcher = ({ isActive, onClick }: Props) => {
   const theme = useTheme();
 
-  const dotClassName = `theme-switcher__dot${
-    isActive ? ' theme-switcher__dot_active' : ''
-  }`;
+  const dotClassNameModifier = isActive ? ' theme-switcher__dot_active' : '';
 
   return (
     <button
@@ -21,7 +19,7 @@ const ThemeSwitcher = ({ isActive, onClick }: Props) => {
     >
       <SunIcon className="them-switcher__icon" width={20} />
       <MoonIcon className="them-switcher__icon" width={20} />
-      <div className={dotClassName} />
+      <div className={`theme-switcher__dot${dotClassNameModifier}`} />
     </button>
   );
 };
