@@ -1,0 +1,49 @@
+.error-page {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+  padding: 100px;
+
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.error-page__title {
+  margin: 0;
+
+  font-size: 6rem;
+  line-height: 120%;
+  font-weight: 600;
+  color: var(--main-light-color);
+}
+
+.error-page__highlight {
+  font-weight: 700;
+  color: var(--error-color);
+}
+
+.error-page__details {
+  margin: 0;
+
+  font-size: 4rem;
+  line-height: 130%;
+  color: var(--main-light-color);
+}
+
+.error-page__subdued {
+  font-style: italic;
+
+  opacity: 0.5;
+}
+
+/* DARK THEME */
+
+.error-page_dark .error-page__title {
+  color: var(--main-dark-color);
+}
+
+.error-page_dark .error-page__details {
+  color: var(--main-dark-color);
+}
