@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './layouts/RootLayout/RootLayout';
 
-import { HomePage, StopwatchPage, TimerPage } from './pages';
+import { HomePage, NotFoundPage, StopwatchPage, TimerPage } from './pages';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: '/stopwatch',
         element: <StopwatchPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },
