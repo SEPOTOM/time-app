@@ -34,6 +34,10 @@ const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
 };
 
 const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
+  if (!hours) {
+    return '00';
+  }
+
   if (seconds !== '00' || minutes !== '00') {
     return hours;
   }
