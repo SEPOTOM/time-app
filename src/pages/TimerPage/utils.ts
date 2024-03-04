@@ -1,15 +1,15 @@
 import { formatTimeValue } from '../../utils/formatTimeValue';
 
-import { HMSTimeState } from './types';
+import { TimeState } from '../../types';
 
 const MAX_SECONDS = '59';
 const MAX_MINUTES = '59';
 
-const isTimeZero = ({ seconds, minutes, hours }: HMSTimeState): boolean => {
+const isTimeZero = ({ seconds, minutes, hours }: TimeState): boolean => {
   return hours === '00' && minutes === '00' && seconds === '00';
 };
 
-const getNewSeconds = ({ seconds, minutes, hours }: HMSTimeState): string => {
+const getNewSeconds = ({ seconds, minutes, hours }: TimeState): string => {
   const rawNewSeconds = Number(seconds) - 1;
 
   if (rawNewSeconds < 0) {
@@ -19,7 +19,7 @@ const getNewSeconds = ({ seconds, minutes, hours }: HMSTimeState): string => {
   return formatTimeValue(rawNewSeconds);
 };
 
-const getNewMinutes = ({ seconds, minutes, hours }: HMSTimeState): string => {
+const getNewMinutes = ({ seconds, minutes, hours }: TimeState): string => {
   if (seconds !== '00') {
     return minutes;
   }
@@ -33,7 +33,7 @@ const getNewMinutes = ({ seconds, minutes, hours }: HMSTimeState): string => {
   return formatTimeValue(rawNewMinutes);
 };
 
-const getNewHours = ({ seconds, minutes, hours }: HMSTimeState): string => {
+const getNewHours = ({ seconds, minutes, hours }: TimeState): string => {
   if (seconds !== '00' || minutes !== '00') {
     return hours;
   }
