@@ -11,10 +11,6 @@ import ThemeContext, { Themes } from '../../contexts/ThemeContext';
 const RootLayout = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const handleThemeToggle = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
-
   const theme = isDarkTheme ? Themes.DARK : Themes.LIGHT;
 
   return (
@@ -24,7 +20,10 @@ const RootLayout = () => {
           <HomeButton>
             <HomeIcon width={24} />
           </HomeButton>
-          <ThemeSwitcher isActive={isDarkTheme} onClick={handleThemeToggle} />
+          <ThemeSwitcher
+            isActive={isDarkTheme}
+            onClick={() => setIsDarkTheme(!isDarkTheme)}
+          />
         </header>
         <Outlet />
         <footer className="root-layout__footer">Time App</footer>
