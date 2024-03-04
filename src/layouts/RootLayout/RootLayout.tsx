@@ -9,13 +9,16 @@ import { HomeButton, ThemeSwitcher } from '../../components';
 import ThemeContext, { Themes } from '../../contexts/ThemeContext';
 
 const RootLayout = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-
-  const handleThemeToggle = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    JSON.parse(localStorage.getItem('time-app-is-dark-theme') || 'false')
+  );
 
   const theme = isDarkTheme ? Themes.DARK : Themes.LIGHT;
+
+  const handleThemeSwitch = () => {
+    setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem('time-app-is-dark-theme', String(!isDarkTheme));
+  };
 
   return (
     <ThemeContext.Provider value={theme}>
@@ -24,7 +27,7 @@ const RootLayout = () => {
           <HomeButton>
             <HomeIcon width={24} />
           </HomeButton>
-          <ThemeSwitcher isActive={isDarkTheme} onClick={handleThemeToggle} />
+          <ThemeSwitcher isActive={isDarkTheme} onClick={handleThemeSwitch} />
         </header>
         <Outlet />
         <footer className="root-layout__footer">Time App</footer>

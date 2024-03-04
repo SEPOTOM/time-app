@@ -1,21 +1,13 @@
-import { ReactNode } from 'react';
-
 import { formatIndex } from './utils';
 
 import { ListProps } from './types';
 
 const ConsoleList = ({ lapsTimes, lapTimes, index }: ListProps) => {
-  const getSeparator = (): ReactNode => {
-    return (
-      index !== lapsTimes.length - 1 && (
-        <p className="console__placeholder">----------------------------</p>
-      )
-    );
-  };
-
   return (
     <>
-      {getSeparator()}
+      {index !== lapsTimes.length - 1 && (
+        <p className="console__placeholder">----------------------------</p>
+      )}
       <ul className="console__list">
         {lapTimes
           .map((lapTime, lapTimeIndex) => {

@@ -9,10 +9,6 @@ import { InputProps } from './types';
 const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
   const theme = useTheme();
 
-  const handleClick = (e: MouseEvent<HTMLInputElement>) => {
-    e.currentTarget.select();
-  };
-
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const NUMBERS_REGEXP = /^[0-9]*$/;
 
@@ -49,7 +45,7 @@ const ClockFaceInput = ({ maxValue, value, onChange }: InputProps) => {
       type="number"
       inputMode="numeric"
       value={value}
-      onClick={handleClick}
+      onClick={(e: MouseEvent<HTMLInputElement>) => e.currentTarget.select()}
       onKeyDown={handleKeyDown}
       onChange={handleChange}
       onBlur={handleBlur}

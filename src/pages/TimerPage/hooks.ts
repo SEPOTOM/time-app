@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 
 import { getNewHours, getNewMinutes, getNewSeconds, isTimeZero } from './utils';
 
-import { HMSTimeState, TimerEffectProps } from './types';
+import { TimeState } from '../../types';
+import { TimerEffectProps } from './types';
 
 const useTimerEffect = ({
   isStarted,
@@ -15,7 +16,7 @@ const useTimerEffect = ({
     let intervalId: number | null = null;
 
     const decreaseTime = () => {
-      setTime((t: HMSTimeState) => {
+      setTime((t: TimeState) => {
         if (isTimeZero(t)) {
           setIsFinished(true);
           return t;

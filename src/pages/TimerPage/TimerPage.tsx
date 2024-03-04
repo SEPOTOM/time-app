@@ -9,7 +9,7 @@ import { useTimerEffect } from './hooks';
 
 import { isTimeZero } from './utils';
 
-import { HMSTimeState } from './types';
+import { TimeState } from '../../types';
 
 import { INITIAL_TIME } from './data';
 
@@ -17,7 +17,7 @@ const TimerPage = () => {
   const [isStarted, setIsStarted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const [time, setTime] = useState<HMSTimeState>(INITIAL_TIME);
+  const [time, setTime] = useState<TimeState>(INITIAL_TIME);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -48,10 +48,6 @@ const TimerPage = () => {
     }
   };
 
-  const handlePauseToggle = () => {
-    setIsPaused(!isPaused);
-  };
-
   const handleCountdownStop = () => {
     setIsStarted(false);
     setIsPaused(false);
@@ -68,7 +64,7 @@ const TimerPage = () => {
             <>
               {!isFinished && (
                 <PauseResumeButton
-                  onClick={handlePauseToggle}
+                  onClick={() => setIsPaused(!isPaused)}
                   isPaused={isPaused}
                 />
               )}
